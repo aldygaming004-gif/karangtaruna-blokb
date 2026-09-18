@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karang Taruna Blok B - FIX SIMPAN</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0a0a0a;color:#fff;padding:14px}
+.card{background:#171717;border-radius:20px;padding:18px;margin-bottom:14px;border:1px solid #262626}
+.saldo{background:linear-gradient(135deg,#16a34a,#15803d)}
+input,select{width:100%;padding:12px;background:#262626;border:1px solid #444;border-radius:12px;color:#fff;margin-top:8px;font-size:16px}
+button{padding:14px;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px}
+.badge{padding:5px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.lunas{background:#16a34a}.belum{background:#ef4444}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #262626}
+</style>
+</head>
+<body>
+<div style="max-width:600px;margin:auto">
+<h2 style="margin:12px 0">Dashboard Kas<br><small style="color:#22c55e">karangtaruna-blokb.netlify.app</small></h2>
+<div class="card saldo"><small>Saldo Kas</small><b id="saldo" style="font-size:36px;display:block">Rp 0</b><div style="display:flex;gap:12px;margin-top:8px;font-size:12px"><span id="masuk"></span><span id="keluar"></span></div></div>
+<div class="card"><h4>Laporan</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button onclick="exportPDF()" style="background:#fff;color:#000">Export PDF</button><button onclick="window.print()" style="background:#262626;color:#fff;border:1px solid #555">Cetak</button></div></div>
+<div class="card"><h4>Tambah Anggota</h4><input id="nama" placeholder="Nama lengkap"><input id="wa" placeholder="WA 62852xxxx"><button id="btnA" style="width:100%;margin-top:10px;background:#fff;color:#000">Simpan Anggota</button></div>
+<div class="card"><h4>Input Transaksi</h4><select id="tipe"><option value="MASUK">Pemasukan / Iuran</option><option value="KELUAR">Pengeluaran</option></select><input id="jml" placeholder="Jumlah contoh 50000" inputmode="numeric"><input id="ket" placeholder="Keterangan: tulis nama yang bayar"><button id="btnK" style="width:100%;margin-top:10px;background:#22c55e;color:#fff">Simpan Kas</button></div>
+<div class="card"><div style="display:flex;justify-content:space-between"><h4>Anggota - <span id="bulan"></span></h4><span id="jmlAngg" style="color:#888;font-size:12px"></span></div><div id="listA" style="margin-top:10px"></div><button onclick="tagihSemua()" style="background:#25D366;color:#fff;width:100%;margin-top:14px">Tagih WA Semua BELUM</button></div>
+<div class="card"><h4>Buku Kas</h4><div id="listK" style="margin-top:8px"></div><button onclick="resetAll()" style="background:#222;color:#ef4444;width:100%;margin-top:12px;border:1px solid #333">Reset Data</button></div>
+</div>
+<script>
+let kas=JSON.parse(localStorage.getItem('kas_blokb')||'[]');
+let angg=JSON.parse(localStorage.getItem('angg_blokb')||'[]');
+let blnArr=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+let bln=blnArr[new Date().getMonth()]+" "+new Date().getFullYear();
+document.getElementById('bulan').innerText=bln;
+function save(){localStorage.setItem('kas_blokb',JSON.stringify(kas));localStorage.setItem('angg_blokb',JSON.stringify(angg));render();}
+document.getElementById('btnA').addEventListener('click',function(){
+let n=document.getElementById('nama').value.trim();
+let w=document.getElementById('wa').value.trim();
+if(!n){alert('Isi nama dulu');return;}
+if(!w){alert('Isi WA');return;}
+w=w.replace(/[^0-9]/g,'');if(w.startsWith('0'))w='62'+w.substring(1);
+angg.push({id:Date.now(),nama:n,wa:w});
+document.getElementById('nama').value='';document.getElementById('wa').value='';
+save();alert('Anggota '+n+' disimpan!');
+});
+document.getElementById('btnK').addEventListener('click',function(){
+let tipe=document.getElementById('tipe').value;
+let jmlRaw=document.getElementById('jml').value;
+let ket=document.getElementById('ket').value.trim();
+let num=parseInt(jmlRaw.replace(/[^0-9]/g,''));
+if(!num){alert('Isi jumlah uang, contoh 50000');return;}
+if(!ket){alert('Isi keterangan / nama');return;}
+kas.push({id:Date.now(),tipe:tipe,jumlah:num,ket:ket,tgl:new Date().toLocaleDateString('id-ID')});
+document.getElementById('jml').value='';document.getElementById('ket').value='';
+save();alert('Transaksi '+tipe+' Rp '+num+' disimpan!');
+});
+function delA(id){if(confirm('Hapus anggota ini?')){angg=angg.filter(a=>a.id!=id);save();}}
+function delK(id){if(confirm('Hapus transaksi ini?')){kas=kas.filter(k=>k.id!=id);save();}}
+function resetAll(){if(confirm('Yakin reset semua data?')){localStorage.clear();kas=[];angg=[];render();location.reload();}}
+function tagihWA(n,w){let pesan="Halo "+n+", iuran Karang Taruna Blok B bulan "+bln+" Rp 50.000 belum terbayar. Cek: https://karangtaruna-blokb.netlify.app";let url="https://wa.me/"+w+"?text="+encodeURIComponent(pesan);window.location.href=url;}
+function tagihSemua(){let belum=angg.filter(a=>!kas.some(k=>k.tipe==='MASUK' && k.ket.toLowerCase().includes(a.nama.toLowerCase())));if(belum.length===0)return alert('Semua sudah LUNAS!');alert('Akan tagih '+belum.length+' orang.');belum.forEach((a,i)=>{setTimeout(()=>{if(confirm('Tagih '+a.nama+'?'))tagihWA(a.nama,a.wa);},i*500);});}
+function render(){let m=kas.filter(k=>k.tipe==='MASUK').reduce((a,b)=>a+b.jumlah,0);let k=kas.filter(k=>k.tipe==='KELUAR').reduce((a,b)=>a+b.jumlah,0);document.getElementById('saldo').innerText='Rp '+(m-k).toLocaleString('id-ID');document.getElementById('masuk').innerText='Masuk Rp '+m.toLocaleString('id-ID');document.getElementById('keluar').innerText='Keluar Rp '+k.toLocaleString('id-ID');document.getElementById('jmlAngg').innerText=angg.length+' orang';document.getElementById('listA').innerHTML=angg.map(a=>{let lunas=kas.some(x=>x.tipe==='MASUK' && x.ket.toLowerCase().includes(a.nama.toLowerCase()));return '<div class="row"><div><b>'+a.nama+'</b><br><small style="color:#888">'+a.wa+'</small></div><div style="display:flex;gap:6px;align-items:center"><span class="badge '+(lunas?'lunas':'belum')+'">'+(lunas?'LUNAS':'BELUM')+'</span>'+(!lunas?'<button onclick="tagihWA(\''+a.nama.replace(/'/g,'')+'\',\''+a.wa+'\')" style="background:#25D366;color:#fff;padding:8px 12px">WA</button>':'')+'<button onclick="delA('+a.id+')" style="background:#ef4444;color:#fff;padding:8px 10px">X</button></div></div>';}).join('')||'<div style="color:#666;padding:10px 0">Belum ada anggota</div>';document.getElementById('listK').innerHTML=kas.slice().reverse().map(x=>{return '<div class="row"><div><small style="color:#888">'+x.tgl+'</small><br>'+x.ket+'<br><small style="color:'+(x.tipe==='MASUK'?'#22c55e':'#ef4444')+'">'+x.tipe+'</small></div><div><b>Rp '+x.jumlah.toLocaleString('id-ID')+'</b> <button onclick="delK('+x.id+')" style="background:#222;color:#ef4444;margin-left:6px;padding:6px 10px">X</button></div></div>';}).join('')||'<div style="color:#666">Belum ada transaksi</div>';}
+function exportPDF(){const {jsPDF}=window.jspdf;const doc=new jsPDF();doc.setFontSize(14);doc.text('Laporan Kas Karang Taruna Blok B',14,14);doc.setFontSize(10);doc.text('Bulan: '+bln+' | Saldo: '+document.getElementById('saldo').innerText,14,20);let dataA=angg.map(a=>{let l=kas.some(x=>x.tipe==='MASUK' && x.ket.toLowerCase().includes(a.nama.toLowerCase()));return [a.nama,a.wa,l?'LUNAS':'BELUM'];});doc.autoTable({startY:26,head:[['Nama','WA','Status
