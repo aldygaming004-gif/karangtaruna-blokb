@@ -1,42 +1,56 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR BLOK B V13.4 SINGAPORE FIX</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>body{font-family:Arial;background:#000;margin:0}.box{max-width:430px;margin:0 auto;background:#fff;min-height:100vh}.card{margin:12px;border-radius:16px;padding:14px}.b{background:#111;color:#fff;border:1px solid #222}.w{background:#FFFEF0;border:1px solid #FFEC99}.btn{width:100%;padding:14px;border-radius:12px;border:none;font-weight:900;margin-top:8px}.bg{background:#FFD60A;color:#000}.bd{background:#000;color:#fff}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px;box-sizing:border-box}.b input,.b select{background:#222;color:#fff;border:1px solid #444}.item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #222;font-size:13px}.hidden{display:none!important}</style></head><body><div class="box">
-<div id="login" style="background:#000;color:#fff;padding:20px;text-align:center;min-height:100vh"><h1>KARTAR BLOK B</h1><p style="font-size:10px">V13.4 SINGAPORE FIX - ANTI STAK</p><div class="card w" style="color:#000;text-align:left"><b>Login</b><input id="pass" placeholder="Nama / blokb2026"><button class="btn bd" onclick="doLogin()">MASUK</button><p id="conn" style="font-size:10px;text-align:center;margin-top:8px"></p></div></div>
-<div id="admin" class="hidden"><div style="padding:12px;background:#000;color:#fff;display:flex;justify-content:space-between"><b>ADMIN V13.4 FIX</b><button onclick="logout()" style="padding:6px 12px;border-radius:20px;background:#ef4444;color:#fff;border:none">LOGOUT</button></div><div class="card b"><h2 id="aTotal" style="color:#FFD60A;text-align:center">Rp 0</h2><div id="aList"></div>
-<div style="margin-top:12px;padding:12px;background:#1A1A1A;border-radius:12px;border:2px solid #FFD60A"><b style="color:#FFD60A">TAMBAH ANGGOTA - SINGAPORE</b><input id="nama" placeholder="Nama WAJIB"><input id="wa" placeholder="WA 628..."><input id="nom" type="number" placeholder="Nominal"><select id="jenis" style="width:100%;padding:12px;border-radius:10px;background:#222;color:#fff;border:1px solid #444;margin-top:6px"><option value="in">Masuk</option><option value="out">Keluar</option></select><button class="btn bg" id="btnSimpan" onclick="tambahFix()">+ SIMPAN SEKARANG</button><p id="msg" style="text-align:center;font-size:11px;margin-top:8px"></p></div></div><div class="card b"><b>Data (<span id="jml">0</span>) <span id="mode" style="color:#FFD60A;font-size:10px"></span></b><input id="cari" placeholder="Cari..." onkeyup="render()"><div id="listWarga"></div></div></div>
-<div id="warga" class="hidden"><div style="padding:12px;background:#000;color:#fff;display:flex;justify-content:space-between"><b id="wNama">WARGA</b><button onclick="logout()" style="padding:6px 12px;border-radius:20px;background:#ef4444;color:#fff;border:none">LOGOUT</button></div><div class="card b"><h2 id="wTotal" style="color:#FFD60A">Rp 0</h2><div id="wList"></div></div></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR BLOK B V14 GLITCH</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>
+body{margin:0;font-family:'Courier New',monospace;background:#000;overflow-x:hidden}
+.glitch-bg{position:fixed;inset:0;z-index:-2;background:#000}
+.glitch-bg:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,0,255,.15) 2px 3px,rgba(0,255,255,.15) 3px 4px,rgba(255,255,0,.15) 4px 5px);animation:scan 0.2s infinite}
+.glitch-bg:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 30%,rgba(255,0,255,.1) 50%,transparent 70%);animation:shift 1.5s infinite}
+@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(5px)}}
+@keyframes shift{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.box{max-width:430px;margin:0 auto;min-height:100vh;position:relative}
+.card{margin:12px;border-radius:4px;padding:14px;background:rgba(0,0,0,.85);border:2px solid #ff00ff;box-shadow:0 0 10px #ff00ff,0 0 20px #00ffff inset;color:#fff;position:relative;overflow:hidden}
+.card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);animation:hue 2s linear infinite}
+.btn{width:100%;padding:14px;border-radius:0;border:2px solid #00ffff;background:#000;color:#00ffff;font-weight:900;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:0 0 10px #00ffff;cursor:pointer}
+.btn:hover{background:#00ffff;color:#000;box-shadow:0 0 20px #00ffff}
+.bg{border-color:#ffff00;color:#ffff00;box-shadow:0 0 10px #ffff00}
+.bg:hover{background:#ffff00;color:#000}
+input,select{width:100%;padding:12px;background:#000;color:#00ffff;border:2px solid #ff00ff;margin-top:6px;box-sizing:border-box;font-family:'Courier New';box-shadow:0 0 5px #ff00ff inset}
+.item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px dashed #ff00ff;font-size:13px}
+.hidden{display:none!important}
+h1{color:#fff;text-shadow:2px 0 #ff00ff,-2px 0 #00ffff,0 0 20px #ffff00;letter-spacing:3px}
+.glitch-text{animation:glitch 0.3s infinite}
+@keyframes glitch{0%{text-shadow:2px 0 #ff00ff,-2px 0 #00ffff}25%{text-shadow:-2px 0 #ff00ff,2px 0 #ffff00}50%{text-shadow:2px 0 #ffff00,-2px 0 #ff00ff}75%{text-shadow:-2px 0 #00ffff,2px 0 #ff00ff}}
+@keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+</style></head><body><div class="glitch-bg"></div><div class="box">
+<div id="login" style="padding:20px;text-align:center;min-height:100vh"><h1 class="glitch-text">KARTAR<br>BLOK B</h1><p style="color:#00ffff;font-size:10px;letter-spacing:4px">V14 GLITCH EDITION // SINGAPORE FIX</p><div class="card" style="text-align:left;margin-top:30px"><b style="color:#ffff00">> LOGIN_SYSTEM</b><input id="pass" placeholder="> Enter Nama / blokb2026"><button class="btn" onclick="doLogin()">> EXECUTE</button><p id="conn" style="font-size:9px;color:#ff00ff;text-align:center;margin-top:10px"></p></div></div>
+<div id="admin" class="hidden"><div style="padding:12px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b class="glitch-text">ADMIN_V14</b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:6px 12px">EXIT</button></div><div class="card"><h2 id="aTotal" style="color:#ffff00;text-align:center;text-shadow:0 0 10px #ffff00">Rp 0</h2><div id="aList"></div>
+<div style="margin-top:12px;padding:12px;background:#000;border:2px solid #ffff00"><b style="color:#ffff00">> TAMBAH_DATA.exe</b><input id="nama" placeholder="> Nama"><input id="wa" placeholder="> WA 628..."><input id="nom" type="number" placeholder="> Nominal"><select id="jenis"><option value="in">> IN / MASUK</option><option value="out">> OUT / KELUAR</option></select><button class="btn bg" id="btnSimpan" onclick="tambahFix()">> SIMPAN_DATA</button><p id="msg" style="text-align:center;font-size:10px;margin-top:8px;color:#00ffff"></p></div></div><div class="card"><b style="color:#00ffff">> DATABASE (<span id="jml">0</span>) <span id="mode" style="color:#ff00ff;font-size:10px"></span></b><input id="cari" placeholder="> SEARCH..." onkeyup="render()"><div id="listWarga"></div></div></div>
+<div id="warga" class="hidden"><div style="padding:12px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b id="wNama">WARGA</b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:6px 12px">EXIT</button></div><div class="card"><h2 id="wTotal" style="color:#ffff00">Rp 0</h2><div id="wList"></div></div></div></div>
 <script>
-// FIX UTAMA: URL SINGAPORE!
 var firebaseConfig={apiKey:"AIzaSyBykYOwRYyKNKkb0-tYblcwwDABWMnN4ko",authDomain:"blokb-online.firebaseapp.com",databaseURL:"https://blokb-online-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"blokb-online",storageBucket:"blokb-online.firebasestorage.app",messagingSenderId:"589827226624",appId:"1:589827226624:web:742737eae422e111b8ace5"};
 firebase.initializeApp(firebaseConfig);var db=firebase.database();
 var data=JSON.parse(localStorage.getItem('kartar_data')||'[]');var keys=[];var currentUser='';
-document.getElementById('conn').innerText='Connecting to Singapore...';
+document.getElementById('conn').innerText='> CONNECTING_TO_SINGAPORE...';
 db.ref('kartar').on('value',function(s){
-  document.getElementById('conn').innerText='✅ Connected to Singapore DB';
-  document.getElementById('mode').innerText='ONLINE SINGAPORE';
-  document.getElementById('mode').style.color='#22c55e';
+  document.getElementById('conn').innerText='> CONNECTED: SINGAPORE_DB [OK]';
+  var mode=document.getElementById('mode'); if(mode){mode.innerText='ONLINE';mode.style.color='#00ff00';}
   if(s.val()){
     var val=s.val();var arr=[];var karr=[];
-    if(Array.isArray(val)){ for(var i=0;i<val.length;i++){ if(val[i]&&val[i].nama){ arr.push(val[i]); karr.push(i); } } }
-    else { for(var k in val){ if(val[k]&&val[k].nama){ arr.push(val[k]); karr.push(k); } } }
-    if(arr.length>0){ data=arr; keys=karr; localStorage.setItem('kartar_data',JSON.stringify(data)); }
-  }
-  render();
-},function(e){
-  document.getElementById('conn').innerText='❌ Error: '+e.message;
-  document.getElementById('mode').innerText='OFFLINE - '+e.message;
-  render();
-});
+    if(Array.isArray(val)){for(var i=0;i<val.length;i++){if(val[i]&&val[i].nama){arr.push(val[i]);karr.push(i);}}}
+    else{for(var k in val){if(val[k]&&val[k].nama){arr.push(val[k]);karr.push(k);}}}
+    if(arr.length>0){data=arr;keys=karr;localStorage.setItem('kartar_data',JSON.stringify(data));}
+  }render();
+},function(e){document.getElementById('conn').innerText='> ERROR: '+e.message; render();});
 function render(){
   var masuk=0,keluar=0;for(var i=0;i<data.length;i++){var n=parseInt(data[i].nom)||0; if(data[i].jenis==='out') keluar+=n; else masuk+=n;}
   var saldo=masuk-keluar;
   document.getElementById('aTotal').innerText='Rp '+saldo.toLocaleString('id-ID');
   var wTot=document.getElementById('wTotal'); if(wTot) wTot.innerText='Rp '+saldo.toLocaleString('id-ID');
   document.getElementById('jml').innerText=data.length;
-  var html='';for(var j=data.length-1;j>=0&&j>data.length-6;j--){ html+='<div class="item"><span>'+data[j].nama+'</span><b style="color:#FFD60A">Rp '+parseInt(data[j].nom).toLocaleString('id-ID')+'</b></div>';}
-  document.getElementById('aList').innerHTML=html||'Belum ada';
-  var wl=document.getElementById('wList'); if(wl) wl.innerHTML=html||'Belum ada';
+  var html='';for(var j=data.length-1;j>=0&&j>data.length-6;j--){html+='<div class="item"><span>'+data[j].nama+'</span><b style="color:#ffff00">Rp '+parseInt(data[j].nom).toLocaleString('id-ID')+'</b></div>';}
+  document.getElementById('aList').innerHTML=html||'> NO_DATA';
+  var wl=document.getElementById('wList'); if(wl) wl.innerHTML=html||'> NO_DATA';
   var h='';var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase();
-  for(var i=0;i<data.length;i++){ if(data[i].nama.toLowerCase().indexOf(q)===-1) continue; h+='<div class="item"><div><b>'+data[i].nama+'</b><br><small>'+(data[i].wa||'')+' • Rp '+parseInt(data[i].nom).toLocaleString('id-ID')+'</small></div><div><button onclick="editData('+i+')" style="padding:6px 10px;background:#FFD60A;border:none;border-radius:8px;font-size:10px;font-weight:800">EDIT</button> <button onclick="hapusData('+i+')" style="padding:6px 10px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-size:10px">HAPUS</button></div></div>';}
-  document.getElementById('listWarga').innerHTML=h||'Kosong';
+  for(var i=0;i<data.length;i++){if(data[i].nama.toLowerCase().indexOf(q)===-1) continue;h+='<div class="item"><div><b>'+data[i].nama+'</b><br><small style="color:#00ffff">'+(data[i].wa||'')+' • Rp '+parseInt(data[i].nom).toLocaleString('id-ID')+'</small></div><div><button onclick="editData('+i+')" style="background:#ffff00;border:none;padding:6px 10px;font-size:10px">EDIT</button> <button onclick="hapusData('+i+')" style="background:#ff00ff;color:#fff;border:none;padding:6px 10px;font-size:10px">DEL</button></div></div>';}
+  document.getElementById('listWarga').innerHTML=h||'> EMPTY';
 }
 function tambahFix(){
   var n=document.getElementById('nama').value.trim();
@@ -44,25 +58,23 @@ function tambahFix(){
   var nomV=document.getElementById('nom').value.trim();
   var jenis=document.getElementById('jenis').value;
   var btn=document.getElementById('btnSimpan');var msg=document.getElementById('msg');
-  if(!n){ alert('Nama wajib!'); return; }
-  if(!nomV){ alert('Nominal wajib!'); return; }
-  var nom=parseInt(nomV); if(isNaN(nom)||nom<=0){ alert('Nominal salah'); return; }
+  if(!n){alert('Nama wajib!');return;}
+  if(!nomV){alert('Nominal wajib!');return;}
+  var nom=parseInt(nomV); if(isNaN(nom)||nom<=0){alert('Nominal salah');return;}
   var baru={nama:n,wa:w,nom:nom,jenis:jenis,tgl:Date.now()};
-  btn.disabled=true; btn.innerText='⏳ MENYIMPAN KE SINGAPORE...'; msg.innerText='Mengirim ke Singapore DB...';
-  // Simpan lokal dulu
   data.push(baru); keys.push('local_'+Date.now()); localStorage.setItem('kartar_data',JSON.stringify(data)); render();
+  btn.disabled=true; btn.innerText='> UPLOADING...'; msg.innerText='> SYNCING_TO_SINGAPORE...';
   db.ref('kartar').push(baru).then(function(){
-    btn.disabled=false; btn.innerText='+ SIMPAN SEKARANG';
-    msg.style.color='#22c55e'; msg.innerText='✅ Berhasil! '+n+' Rp '+nom.toLocaleString('id-ID')+' tersimpan di Singapore!';
-    document.getElementById('nama').value=''; document.getElementById('wa').value=''; document.getElementById('nom').value='';
+    btn.disabled=false; btn.innerText='> SIMPAN_DATA';
+    msg.style.color='#00ff00'; msg.innerText='> SUCCESS: '+n+' SAVED [GLITCH OK]';
+    document.getElementById('nama').value='';document.getElementById('wa').value='';document.getElementById('nom').value='';
   }).catch(function(err){
-    btn.disabled=false; btn.innerText='+ SIMPAN SEKARANG';
-    msg.style.color='#ef4444'; msg.innerText='❌ Gagal: '+err.message;
-    alert('GAGAL: '+err.message+'\n\nKlik tombol biru Rules publish di Firebase!');
+    btn.disabled=false; btn.innerText='> SIMPAN_DATA';
+    msg.style.color='#ff00ff'; msg.innerText='> OFFLINE_SAVED, SYNC LATER: '+err.message;
   });
 }
-function editData(i){var d=data[i];var k=keys[i];var nn=prompt('Nama:',d.nama);if(nn===null) return;var nnom=prompt('Nominal:',d.nom);if(nnom===null) return;var nb=parseInt(nnom);if(isNaN(nb)) return;if(k.toString().indexOf('local')===-1){ db.ref('kartar/'+k).update({nama:nn.trim(),nom:nb}).then(function(){ alert('✅ Edit ok'); }); }else{ data[i].nama=nn.trim();data[i].nom=nb;localStorage.setItem('kartar_data',JSON.stringify(data));render();}}
-function hapusData(i){if(!confirm('Hapus '+data[i].nama+'?')) return;var k=keys[i];if(k.toString().indexOf('local')===-1){ db.ref('kartar/'+k).remove().then(function(){ alert('✅ Hapus ok'); }); }else{ data.splice(i,1);keys.splice(i,1);localStorage.setItem('kartar_data',JSON.stringify(data));render();}}
+function editData(i){var d=data[i];var k=keys[i];var nn=prompt('Nama:',d.nama);if(nn===null)return;var nnom=prompt('Nominal:',d.nom);if(nnom===null)return;var nb=parseInt(nnom);if(isNaN(nb))return;if(k.toString().indexOf('local')===-1){db.ref('kartar/'+k).update({nama:nn.trim(),nom:nb});}else{data[i].nama=nn.trim();data[i].nom=nb;localStorage.setItem('kartar_data',JSON.stringify(data));render();}}
+function hapusData(i){if(!confirm('Hapus '+data[i].nama+'?'))return;var k=keys[i];if(k.toString().indexOf('local')===-1){db.ref('kartar/'+k).remove();}else{data.splice(i,1);keys.splice(i,1);localStorage.setItem('kartar_data',JSON.stringify(data));render();}}
 function doLogin(){var p=document.getElementById('pass').value.trim();if(p==='blokb2026'){localStorage.setItem('admin','1');showAdmin();}else if(p!=''){currentUser=p;localStorage.setItem('user',p);localStorage.removeItem('admin');showWarga();}else{showWarga();}}
 function showWarga(){document.getElementById('login').classList.add('hidden');document.getElementById('admin').classList.add('hidden');document.getElementById('warga').classList.remove('hidden');currentUser=localStorage.getItem('user')||'Warga';var el=document.getElementById('wNama');if(el) el.innerText=currentUser.toUpperCase();render();}
 function showAdmin(){document.getElementById('login').classList.add('hidden');document.getElementById('warga').classList.add('hidden');document.getElementById('admin').classList.remove('hidden');render();}
