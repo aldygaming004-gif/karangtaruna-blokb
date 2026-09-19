@@ -1,120 +1,99 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR BLOK B V13.1 FIX TAMBAH EDIT</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>body{font-family:Arial,sans-serif;background:#0a0a0a;margin:0}.box{max-width:430px;margin:0 auto;background:#fff;min-height:100vh;padding-bottom:80px}.card{margin:12px;border-radius:16px;padding:14px}.w{background:#FFFEF0;border:1px solid #FFEC99}.b{background:#111;color:#fff;border:1px solid #222}.btn{width:100%;padding:13px;border-radius:12px;border:none;font-weight:800;margin-top:8px}.bg{background:#FFD60A;color:#000}.br{background:#ef4444;color:#fff}.bd{background:#000;color:#fff}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px;box-sizing:border-box}.b input,.b select{background:#222;color:#fff;border:1px solid #444}.item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #222;font-size:13px}.logo-main{width:160px;height:160px;object-fit:contain}.logo-mini{width:40px;height:40px;object-fit:contain}.hidden{display:none!important}.rank{display:flex;gap:8px;overflow-x:auto;padding:8px 0}.rank-card{min-width:110px;background:#1A1A1A;border:1px solid #333;border-radius:12px;padding:10px;text-align:center}</style></head><body><div class="box">
-<div id="login" style="background:#000;color:#fff;padding:20px;text-align:center;min-height:100vh;box-sizing:border-box"><img src="logo.png" onerror="this.style.display='none'" class="logo-main"><h1 style="margin:14px 0 2px">KARTAR BLOK B</h1><p style="margin:0;font-size:10px;opacity:.7">KARANG TARUNA BLOK.B • GARUDA MUDA<br>V13.1 FIX TAMBAH EDIT</p><div class="card w" style="text-align:left;margin-top:20px;color:#000"><b>Login</b><br><small>Nama = Anggota, kosong = Warga, blokb2026 = Admin</small><input id="pass" placeholder="Nama / blokb2026"><button class="btn bd" onclick="doLogin()">MASUK</button></div></div>
-<div id="warga" class="hidden"><div style="padding:12px;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #FFD60A"><div style="display:flex;gap:10px;align-items:center"><img src="logo.png" class="logo-mini"><div><b id="wNama">WARGA</b><br><small id="wStatus" style="color:#FFD60A">Anggota</small></div></div><button onclick="logout()" style="padding:6px 14px;border-radius:20px;background:#ef4444;color:#fff;border:none;font-weight:800">LOGOUT</button></div><div class="card b"><small>Total Kas</small><h2 id="wTotal" style="color:#FFD60A;font-size:30px">Rp 0</h2><div style="display:flex;gap:8px"><div style="flex:1;background:#1A1A1A;padding:10px;border-radius:10px"><small>Bulan Ini</small><br><b id="wIn">Rp 0</b></div><div style="flex:1;background:#1A1A1A;padding:10px;border-radius:10px"><small>Keluar</small><br><b id="wOut">Rp 0</b></div></div></div><div class="card b" style="border:1px solid #FFD60A"><b>Dashboard Saya</b><div class="item"><span>Iuran Saya</span><b id="myTotal" style="color:#FFD60A">Rp 0</b></div><div class="item"><span>Bayar</span><b id="myCount">0x</b></div></div><div class="card w"><b>Aktivitas</b><div id="wList"></div></div><div class="card b"><b>Top 5</b><div id="rank" class="rank"></div></div></div>
-<div id="admin" class="hidden"><div style="display:flex;justify-content:space-between;padding:12px;background:#000;color:#fff;align-items:center;border-bottom:2px solid #FFD60A"><b>ADMIN V13.1</b><div><span id="aJml"></span> <button onclick="logout()" style="padding:6px 14px;border-radius:20px;background:#ef4444;color:#fff;border:none">LOGOUT</button></div></div><div class="card b"><div style="text-align:center"><small id="today"></small><h2 id="aTotal" style="color:#FFD60A;font-size:28px">Rp 0</h2></div><div id="aList"></div><div style="margin-top:12px;padding:12px;background:#1A1A1A;border-radius:12px;border:1px solid #333"><b style="color:#FFD60A">TAMBAH ANGGOTA / IURAN</b><input id="nama" placeholder="Nama Lengkap"><input id="wa" placeholder="WA 628xxxx"><input id="nom" type="number" placeholder="Nominal (contoh 50000)"><select id="jenis" style="width:100%;padding:12px;border-radius:10px;background:#222;color:#fff;border:1px solid #444;margin-top:6px"><option value="in">Masuk / Iuran</option><option value="out">Keluar</option></select><button class="btn bg" onclick="tambah()">+ SIMPAN ONLINE</button><small id="msgTambah" style="display:block;margin-top:8px;color:#22c55e;text-align:center"></small></div></div><div class="card b"><b>Data Anggota (<span id="jml">0</span>)</b><input id="cari" placeholder="Cari nama..." onkeyup="renderWarga()"><div id="listWarga"></div></div></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR BLOK B V13.2 ANTI STAK</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>body{font-family:Arial,sans-serif;background:#000;margin:0}.box{max-width:430px;margin:0 auto;background:#fff;min-height:100vh}.card{margin:12px;border-radius:16px;padding:14px}.b{background:#111;color:#fff;border:1px solid #222}.w{background:#FFFEF0;border:1px solid #FFEC99}.btn{width:100%;padding:14px;border-radius:12px;border:none;font-weight:900;margin-top:8px;font-size:14px}.bg{background:#FFD60A;color:#000}.br{background:#ef4444;color:#fff}.bd{background:#000;color:#fff}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px;box-sizing:border-box}.b input,.b select{background:#222;color:#fff;border:1px solid #444}.item{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #222;font-size:13px}.logo-main{width:150px;height:150px;object-fit:contain}.hidden{display:none!important}</style></head><body><div class="box">
+<div id="login" style="background:#000;color:#fff;padding:20px;text-align:center;min-height:100vh"><img src="logo.png" class="logo-main"><h1>KARTAR BLOK B</h1><p style="font-size:10px;opacity:.6">V13.2 ANTI STAK TAMBAH</p><div class="card w" style="color:#000;text-align:left;margin-top:20px"><b>Login</b><input id="pass" placeholder="Nama / blokb2026"><button class="btn bd" onclick="doLogin()">MASUK</button></div></div>
+<div id="warga" class="hidden"><div style="padding:12px;background:#000;color:#fff;display:flex;justify-content:space-between"><b id="wNama">WARGA</b><button onclick="logout()" style="padding:6px 12px;border-radius:20px;background:#ef4444;color:#fff;border:none">LOGOUT</button></div><div class="card b"><h2 id="wTotal" style="color:#FFD60A">Rp 0</h2><div id="wList"></div></div></div>
+<div id="admin" class="hidden"><div style="padding:12px;background:#000;color:#fff;display:flex;justify-content:space-between"><b>ADMIN V13.2</b><button onclick="logout()" style="padding:6px 12px;border-radius:20px;background:#ef4444;color:#fff;border:none">LOGOUT</button></div>
+<div class="card b"><h2 id="aTotal" style="color:#FFD60A;text-align:center">Rp 0</h2><div id="aList"></div>
+<div style="margin-top:12px;padding:12px;background:#1A1A1A;border-radius:12px;border:2px solid #FFD60A"><b style="color:#FFD60A">TAMBAH ANGGOTA - ANTI STAK</b><input id="nama" placeholder="Nama Lengkap WAJIB"><input id="wa" placeholder="WA 628..."><input id="nom" type="number" placeholder="Nominal WAJIB contoh 50000"><select id="jenis" style="width:100%;padding:12px;border-radius:10px;background:#222;color:#fff;border:1px solid #444;margin-top:6px"><option value="in">Masuk / Iuran</option><option value="out">Keluar</option></select><button class="btn bg" id="btnSimpan" onclick="tambah()">+ SIMPAN SEKARANG</button><p id="msg" style="text-align:center;font-size:12px;margin:8px 0 0"></p></div></div>
+<div class="card b"><b>Data (<span id="jml">0</span>)</b><input id="cari" placeholder="Cari..." onkeyup="render()"><div id="listWarga"></div></div></div></div>
 <script>
 var firebaseConfig={apiKey:"AIzaSyBykYOwRYyKNKkb0-tYblcwwDABWMnN4ko",authDomain:"blokb-online.firebaseapp.com",databaseURL:"https://blokb-online-default-rtdb.firebaseio.com",projectId:"blokb-online",storageBucket:"blokb-online.firebasestorage.app",messagingSenderId:"589827226624",appId:"1:589827226624:web:742737eae422e111b8ace5"};
-firebase.initializeApp(firebaseConfig);var db=firebase.database();var data=[];var currentUser='';document.getElementById('today').innerText=new Date().toLocaleDateString('id-ID');
-// LOAD DATA - FIX UTAMA
-db.ref('kartar').on('value',function(s){
-  if(s.val()){
-    var v=s.val();
-    var arr=Array.isArray(v)?v:Object.values(v);
-    // Kasih tgl kalau belum ada
-    for(var i=0;i<arr.length;i++){ if(!arr[i].tgl) arr[i].tgl=Date.now()+i; if(!arr[i].nom) arr[i].nom=0; }
-    data=arr;
-    localStorage.setItem('kartar_data',JSON.stringify(data));
-  } else {
-    data=JSON.parse(localStorage.getItem('kartar_data')||'[]');
+firebase.initializeApp(firebaseConfig);
+var db=firebase.database();
+var data=[];var keys=[];var currentUser='';
+
+function load(){
+  db.ref('kartar').on('value',function(s){
+    data=[];keys=[];
+    if(s.val()){
+      var val=s.val();
+      if(Array.isArray(val)){
+        // data lama format array
+        for(var i=0;i<val.length;i++){ if(val[i]&&val[i].nama){ data.push(val[i]); keys.push(i); } }
+      } else {
+        // data baru format push (object)
+        for(var k in val){ if(val[k]&&val[k].nama){ data.push(val[k]); keys.push(k); } }
+      }
+    }
+    render();
+  },function(e){ alert('Firebase Error: '+e.message+'\nGanti Rules jadi public!'); });
+}
+load();
+
+function render(){
+  var masuk=0,keluar=0;
+  for(var i=0;i<data.length;i++){ var n=parseInt(data[i].nom)||0; if(data[i].jenis==='out') keluar+=n; else masuk+=n; }
+  var saldo=masuk-keluar;
+  document.getElementById('aTotal').innerText='Rp '+saldo.toLocaleString('id-ID');
+  document.getElementById('wTotal').innerText='Rp '+saldo.toLocaleString('id-ID');
+  document.getElementById('jml').innerText=data.length;
+  var html='';
+  for(var j=data.length-1;j>=0&&j>data.length-6;j--){ html+='<div class="item"><span>'+data[j].nama+'</span><b style="color:#FFD60A">Rp '+parseInt(data[j].nom).toLocaleString('id-ID')+'</b></div>'; }
+  document.getElementById('aList').innerHTML=html||'Belum ada';
+  document.getElementById('wList').innerHTML=html||'Belum ada';
+  var h='';var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase();
+  for(var i=0;i<data.length;i++){
+    if(data[i].nama.toLowerCase().indexOf(q)===-1) continue;
+    h+='<div class="item"><div><b>'+data[i].nama+'</b><br><small>'+(data[i].wa||'')+' • Rp '+parseInt(data[i].nom).toLocaleString('id-ID')+'</small></div><div><button onclick="editData('+i+')" style="padding:6px 10px;background:#FFD60A;border:none;border-radius:8px;font-size:10px;font-weight:800">EDIT</button> <button onclick="hapusData('+i+')" style="padding:6px 10px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-size:10px">HAPUS</button></div></div>';
   }
-  render();
-},function(err){ alert('Firebase error: '+err.message); data=JSON.parse(localStorage.getItem('kartar_data')||'[]'); render(); });
+  document.getElementById('listWarga').innerHTML=h||'Kosong';
+  if(currentUser){ document.getElementById('wNama').innerText=currentUser.toUpperCase(); }
+}
 
-function render(){var masuk=0,keluar=0;for(var i=0;i<data.length;i++){if(data[i].jenis==='out') keluar+=parseInt(data[i].nom)||0; else masuk+=parseInt(data[i].nom)||0;}var saldo=masuk-keluar;document.getElementById('aTotal').innerText='Rp '+saldo.toLocaleString('id-ID');document.getElementById('wTotal').innerText='Rp '+saldo.toLocaleString('id-ID');document.getElementById('aJml').innerText=data.length+' org';document.getElementById('jml').innerText=data.length;var now=new Date();var mb=0,kb=0;for(var i=0;i<data.length;i++){var dt=new Date(data[i].tgl||Date.now());if(dt.getMonth()==now.getMonth()){if(data[i].jenis==='out') kb+=parseInt(data[i].nom)||0; else mb+=parseInt(data[i].nom)||0;}}document.getElementById('wIn').innerText='Rp '+mb.toLocaleString('id-ID');document.getElementById('wOut').innerText='Rp '+kb.toLocaleString('id-ID');var html='';for(var j=data.length-1;j>=0&&j>data.length-6;j--){html+='<div class="item"><span>'+data[j].nama+'</span><b style="color:#FFD60A">Rp '+parseInt(data[j].nom).toLocaleString('id-ID')+'</b></div>';}document.getElementById('aList').innerHTML=html||'Belum ada';document.getElementById('wList').innerHTML=html||'Belum ada';if(currentUser){var my=data.filter(function(d){return d.nama.toLowerCase()===currentUser.toLowerCase();});var myTot=0;for(var i=0;i<my.length;i++){if(my[i].jenis!='out') myTot+=parseInt(my[i].nom)||0;}document.getElementById('wNama').innerText=currentUser.toUpperCase();document.getElementById('myTotal').innerText='Rp '+myTot.toLocaleString('id-ID');document.getElementById('myCount').innerText=my.length+'x';document.getElementById('wStatus').innerText=my.length>0?'Anggota Terdaftar':'Warga Umum';}var map={};for(var i=0;i<data.length;i++){var k=data[i].nama.toLowerCase();if(!map[k]) map[k]={nama:data[i].nama,total:0,count:0}; if(data[i].jenis!='out'){map[k].total+=parseInt(data[i].nom)||0; map[k].count++;}}var rank=Object.values(map).sort(function(a,b){return b.total-a.total;}).slice(0,5);var rh='';for(var i=0;i<rank.length;i++){rh+='<div class="rank-card"><div>'+(i==0?'🥇':i==1?'🥈':i==2?'🥉':'⭐')+'</div><b style="font-size:11px">'+rank[i].nama+'</b><br><small style="color:#FFD60A">Rp '+rank[i].total.toLocaleString('id-ID')+'</small></div>';}document.getElementById('rank').innerHTML=rh;renderWarga();}
-function renderWarga(){var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase();var el=document.getElementById('listWarga');if(!el) return;var h='';for(var i=0;i<data.length;i++){if(data[i].nama.toLowerCase().indexOf(q)===-1) continue;h+='<div class="item"><div><b>'+data[i].nama+'</b><br><small style="opacity:.6">'+(data[i].wa||'No WA')+' • Rp '+parseInt(data[i].nom).toLocaleString('id-ID')+'</small></div><div style="display:flex;gap:4px"><button onclick="editData('+i+')" style="padding:6px 10px;background:#FFD60A;border:none;border-radius:8px;font-size:10px;font-weight:800">EDIT</button><button onclick="hapusData('+i+')" style="padding:6px 10px;background:#ef4444;color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:800">HAPUS</button></div></div>';}el.innerHTML=h||'Kosong - Tambah dulu';}
-
-// === FIX TAMBAH ANGGOTA - 100% JALAN ===
+// === FIX PALING PENTING - ANTI STAK ===
 function tambah(){
   var n=document.getElementById('nama').value.trim();
   var w=document.getElementById('wa').value.trim();
-  var nomStr=document.getElementById('nom').value.trim();
+  var nomV=document.getElementById('nom').value.trim();
   var jenis=document.getElementById('jenis').value;
-  var msg=document.getElementById('msgTambah');
-  if(!n){ alert('Nama harus diisi!'); return; }
-  if(!nomStr){ alert('Nominal harus diisi!'); return; }
-  var nom=parseInt(nomStr);
-  if(isNaN(nom)||nom<=0){ alert('Nominal tidak valid!'); return; }
-  msg.innerText='Menyimpan...';
+  var btn=document.getElementById('btnSimpan');
+  var msg=document.getElementById('msg');
+  if(!n){ alert('❌ Nama wajib diisi!'); return; }
+  if(!nomV){ alert('❌ Nominal wajib diisi!'); return; }
+  var nom=parseInt(nomV);
+  if(isNaN(nom)||nom<=0){ alert('❌ Nominal harus angka >0'); return; }
+  btn.disabled=true; btn.innerText='⏳ MENYIMPAN...'; msg.style.color='#FFD60A'; msg.innerText='Mengirim ke Firebase...';
   var baru={nama:n,wa:w,nom:nom,jenis:jenis,tgl:Date.now()};
-  // Langsung push ke Firebase, tidak pakai once dulu biar anti-gagal
-  db.ref('kartar').once('value').then(function(s){
-    var online=[];
-    if(s.val()){
-      var v=s.val();
-      online=Array.isArray(v)?v:Object.values(v);
-    }
-    // filter data kosong
-    online=online.filter(function(x){ return x && x.nama; });
-    var gab=online.concat([baru]);
-    return db.ref('kartar').set(gab);
-  }).then(function(){
-    msg.innerText='✅ Berhasil simpan '+n+' Rp '+nom.toLocaleString('id-ID');
-    document.getElementById('nama').value='';
-    document.getElementById('wa').value='';
-    document.getElementById('nom').value='';
-    setTimeout(function(){ msg.innerText=''; },3000);
+  // PAKAI PUSH - INI YANG BIKIN ANTI STAK
+  db.ref('kartar').push(baru).then(function(){
+    msg.style.color='#22c55e'; msg.innerText='✅ Berhasil simpan '+n+' Rp '+nom.toLocaleString('id-ID');
+    document.getElementById('nama').value=''; document.getElementById('wa').value=''; document.getElementById('nom').value='';
+    btn.disabled=false; btn.innerText='+ SIMPAN SEKARANG';
+    setTimeout(function(){ msg.innerText=''; },4000);
   }).catch(function(err){
-    msg.innerText='';
-    alert('Gagal simpan: '+err.message+'\nCek Rules Firebase harus public!');
-    console.log(err);
+    btn.disabled=false; btn.innerText='+ SIMPAN SEKARANG';
+    msg.style.color='#ef4444'; msg.innerText='❌ Gagal: '+err.message;
+    alert('GAGAL SIMPAN!\n\nPenyebab: '+err.message+'\n\nSOLUSI:\n1. Buka Firebase Console\n2. Realtime Database > Rules\n3. Ganti jadi:\n{\n "rules": {\n ".read": true,\n ".write": true\n }\n}\n4. Publish');
   });
 }
 
-// === FIX EDIT ANGGOTA - 100% JALAN ===
 function editData(i){
-  if(i<0||i>=data.length){ alert('Data tidak ditemukan'); return; }
-  var d=data[i];
-  var nn=prompt('Edit Nama:',d.nama);
-  if(nn===null) return;
-  nn=nn.trim(); if(!nn){ alert('Nama tidak boleh kosong'); return; }
-  var nwa=prompt('Edit WA:',d.wa||'');
-  if(nwa===null) return;
-  var nnom=prompt('Edit Nominal:',d.nom);
-  if(nnom===null) return;
-  var nomBaru=parseInt(nnom);
-  if(isNaN(nomBaru)){ alert('Nominal harus angka'); return; }
-  var id=d.tgl;
-  db.ref('kartar').once('value').then(function(s){
-    var list=s.val()?(Array.isArray(s.val())?s.val():Object.values(s.val())):[];
-    var ketemu=false;
-    for(var k=0;k<list.length;k++){
-      if(list[k] && (list[k].tgl==id || (list[k].nama==d.nama && list[k].nom==d.nom))){
-        list[k].nama=nn;
-        list[k].wa=nwa;
-        list[k].nom=nomBaru;
-        ketemu=true;
-        break;
-      }
-    }
-    if(!ketemu){ alert('Data di server tidak ketemu, coba Tarik ulang'); return; }
-    return db.ref('kartar').set(list);
-  }).then(function(){ if(arguments[0]!==undefined) alert('✅ Berhasil edit jadi '+nn); }).catch(function(err){ alert('Gagal edit: '+err.message); });
+  var d=data[i]; var k=keys[i];
+  var nn=prompt('Edit Nama:',d.nama); if(nn===null) return;
+  var nwa=prompt('Edit WA:',d.wa||''); if(nwa===null) return;
+  var nnom=prompt('Edit Nominal:',d.nom); if(nnom===null) return;
+  var nb=parseInt(nnom); if(isNaN(nb)){ alert('Nominal harus angka'); return; }
+  db.ref('kartar/'+k).update({nama:nn.trim(),wa:nwa.trim(),nom:nb}).then(function(){ alert('✅ Update berhasil'); }).catch(function(e){ alert('Gagal edit: '+e.message); });
 }
 
-// === FIX HAPUS - 100% JALAN ===
 function hapusData(i){
-  if(i<0||i>=data.length){ alert('Data tidak ditemukan'); return; }
-  var d=data[i];
-  if(!confirm('Yakin HAPUS '+d.nama+' Rp '+parseInt(d.nom).toLocaleString('id-ID')+'?\nData lain aman!')) return;
-  var id=d.tgl;
-  db.ref('kartar').once('value').then(function(s){
-    var list=s.val()?(Array.isArray(s.val())?s.val():Object.values(s.val())):[];
-    var baru=[];
-    for(var k=0;k<list.length;k++){
-      if(!list[k]) continue;
-      // Hapus hanya yang tgl sama, atau kalau tgl tidak ada, pakai nama+nom+wa
-      var isTarget=false;
-      if(list[k].tgl && id){ isTarget=(list[k].tgl==id); }
-      else { isTarget=(list[k].nama==d.nama && list[k].nom==d.nom); }
-      if(!isTarget) baru.push(list[k]);
-    }
-    return db.ref('kartar').set(baru);
-  }).then(function(){ alert('✅ Berhasil hapus '+d.nama); }).catch(function(err){ alert('Gagal hapus: '+err.message); });
+  var d=data[i]; var k=keys[i];
+  if(!confirm('Hapus '+d.nama+' Rp '+d.nom+'?')) return;
+  db.ref('kartar/'+k).remove().then(function(){ alert('✅ Hapus berhasil'); }).catch(function(e){ alert('Gagal hapus: '+e.message); });
 }
 
-function doLogin(){var p=document.getElementById('pass').value.trim();if(p==='blokb2026'){localStorage.setItem('admin','1');showAdmin();}else if(p!=''){currentUser=p;localStorage.setItem('user',p);localStorage.removeItem('admin');showWarga();}else{currentUser='';localStorage.setItem('user','Warga Umum');showWarga();}}
-function showWarga(){document.getElementById('login').classList.add('hidden');document.getElementById('admin').classList.add('hidden');document.getElementById('warga').classList.remove('hidden');currentUser=localStorage.getItem('user')||'';render();}
+function doLogin(){var p=document.getElementById('pass').value.trim();if(p==='blokb2026'){localStorage.setItem('admin','1');showAdmin();}else if(p!=''){currentUser=p;localStorage.setItem('user',p);localStorage.removeItem('admin');showWarga();}else{showWarga();}}
+function showWarga(){document.getElementById('login').classList.add('hidden');document.getElementById('admin').classList.add('hidden');document.getElementById('warga').classList.remove('hidden');currentUser=localStorage.getItem('user')||'Warga';render();}
 function showAdmin(){document.getElementById('login').classList.add('hidden');document.getElementById('warga').classList.add('hidden');document.getElementById('admin').classList.remove('hidden');render();}
-function logout(){localStorage.removeItem('admin');localStorage.removeItem('user');location.reload();}
+function logout(){localStorage.clear();location.reload();}
 if(localStorage.getItem('admin')==='1') showAdmin();
 </script></body></html>
