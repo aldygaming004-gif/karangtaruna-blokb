@@ -1,27 +1,43 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR V22 DB MUNCUL</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>
-body{margin:0;font-family:'Courier New',monospace;background:#000}.box{max-width:430px;margin:0 auto;min-height:100vh}.card{margin:10px;padding:12px;background:#111;border:2px solid #ff00ff;color:#fff;border-radius:4px}.btn{width:100%;padding:12px;border:2px solid #00ffff;background:#000;color:#00ffff;font-weight:900;margin-top:6px;cursor:pointer}.bg{border-color:#ffff00;color:#ffff00}.b10{border-color:#22c55e;color:#22c55e}.bd{border-color:#ff00ff;color:#ff00ff}input,select{width:100%;padding:10px;background:#000;color:#00ffff;border:2px solid #ff00ff;margin-top:5px;box-sizing:border-box;font-family:'Courier New'}.item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #ff00ff;font-size:11px;background:#000;margin-bottom:2px}.hidden{display:none!important}.months{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:6px}.mchk{background:#111;border:1px solid #ff00ff;padding:8px 2px;text-align:center;font-size:10px;cursor:pointer}.mchk.active{background:#ffff00;color:#000;font-weight:900}.dash{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.dbox{background:#000;border:1px solid #00ffff;padding:8px;text-align:center}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR V26 BARANG + PENGUNJUNG</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>
+body{margin:0;font-family:'Courier New',monospace;background:#000}.box{max-width:430px;margin:0 auto;min-height:100vh}.card{margin:10px;padding:12px;background:#111;border:2px solid #ff00ff;color:#fff;border-radius:4px}.btn{width:100%;padding:12px;border:2px solid #00ffff;background:#000;color:#00ffff;font-weight:900;margin-top:6px;cursor:pointer}.bg{border-color:#ffff00;color:#ffff00}.b10{border-color:#22c55e;color:#22c55e}.bd{border-color:#ff00ff;color:#ff00ff}.bo{border-color:#ff8800;color:#ff8800}input,select{width:100%;padding:10px;background:#000;color:#00ffff;border:2px solid #ff00ff;margin-top:5px;box-sizing:border-box;font-family:'Courier New'}.item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #ff00ff;font-size:11px;background:#000;margin-bottom:2px}.hidden{display:none!important}.months{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:6px}.mchk{background:#111;border:1px solid #ff00ff;padding:8px 2px;text-align:center;font-size:10px;cursor:pointer}.mchk.active{background:#ffff00;color:#000;font-weight:900}.dash{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.dbox{background:#000;border:1px solid #00ffff;padding:8px;text-align:center}
 </style></head><body><div class="box">
-<div id="login" style="padding:20px;text-align:center;min-height:100vh;background:#000"><h1 style="color:#fff;text-shadow:2px 0 #ff00ff,-2px 0 #00ffff">KARTAR BLOK B</h1><p style="color:#00ffff;font-size:9px">V22 - FIX DB MUNCUL 106 WARGA</p>
+<div id="login" style="padding:20px;text-align:center;min-height:100vh;background:#000"><h1 style="color:#fff;text-shadow:2px 0 #ff00ff,-2px 0 #00ffff">KARTAR BLOK B</h1><p style="color:#00ffff;font-size:9px">V26 - KAS 113 + BARANG + PENGUNJUNG</p>
 <div class="card" style="border-color:#22c55e"><b style="color:#22c55e">> WARGA (TANPA KUNCI)</b><input id="namaWarga" placeholder="> Nama: Aldi "><button class="btn b10" onclick="loginWarga()">> MASUK WARGA</button></div>
 <div class="card" style="border-color:#ffff00"><b style="color:#ffff00">> ADMIN</b><input id="pass" type="password" placeholder="> Masukan Password "><button class="btn bg" onclick="loginAdmin()">> MASUK ADMIN</button><p id="conn" style="font-size:8px;text-align:center;color:#888;margin-top:6px">Connecting...</p></div>
 </div>
 
-<div id="admin" class="hidden"><div style="padding:10px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b>ADMIN_V22 • <span id="totalW">0</span></b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:5px 10px">EXIT</button></div>
-<div class="card" style="border-color:#ffff00"><div style="text-align:center"><small>Total Kas</small><h2 id="aTotal" style="color:#ffff00;margin:4px 0;font-size:26px">Rp 0</h2></div><div class="dash"><div class="dbox" style="border-color:#22c55e"><small>PEMASUKAN</small><b id="pemasukan" style="color:#22c55e">Rp 0</b><br><small id="jmlLunas" style="font-size:8px">0 lunas 10 bln</small></div><div class="dbox" style="border-color:#ef4444"><small>PENGELUARAN</small><b id="pengeluaran" style="color:#ef4444">Rp 0</b><br><small id="jmlKeluar" style="font-size:8px">0</small></div><div class="dbox"><small>TOTAL WARGA</small><b id="totalW2">0</b></div><div class="dbox"><small>BELUM BAYAR</small><b id="belum" style="color:#ef4444">0</b></div></div></div>
+<div id="admin" class="hidden"><div style="padding:10px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b>ADMIN_V26 • <span id="totalW">0</span> • <span id="saveStatus" style="font-size:8px;color:#22c55e">AUTO ON</span></b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:5px 10px">EXIT</button></div>
+<div class="card" style="border-color:#ffff00"><div style="text-align:center"><small>Total Kas</small><h2 id="aTotal" style="color:#ffff00;margin:4px 0;font-size:26px">Rp 0</h2></div><div class="dash"><div class="dbox" style="border-color:#22c55e"><small>PEMASUKAN</small><b id="pemasukan" style="color:#22c55e">Rp 0</b><br><small id="jmlLunas" style="font-size:8px">0 lunas 10 bln</small></div><div class="dbox" style="border-color:#ef4444"><small>PENGELUARAN</small><b id="pengeluaran" style="color:#ef4444">Rp 0</b><br><small id="jmlKeluar" style="font-size:8px">0</small></div><div class="dbox"><small>TOTAL WARGA</small><b id="totalW2">0</b></div><div class="dbox" style="border-color:#ff8800"><small>BARANG</small><b id="totalBarang" style="color:#ff8800">0</b><small style="font-size:8px"> item</small></div></div></div>
+
+<!-- CARD BARANG BARU -->
+<div class="card" style="border-color:#ff8800;box-shadow:0 0 8px #ff8800"><b style="color:#ff8800">> CARD BARANG / INVENTARIS.exe</b><small style="display:block;opacity:.6;font-size:8px">Sound, kursi, kabel, lampu, tenda</small>
+<div style="margin-top:8px"><input id="namaBarang" placeholder="> Nama Barang: Sound System"><div style="display:flex;gap:4px"><input id="jmlBarang" type="number" value="1" placeholder="Jml"><input id="kondisiBarang" placeholder="Baik/Rusak"><select id="satuanBarang"><option>UNIT</option><option>SET</option><option>BUAH</option><option>METER</option></select></div><input id="hargaBarang" type="number" placeholder="> Harga Beli"><input id="ketBarang" placeholder="> Ket: Milik Blok B"></div>
+<button class="btn bo" id="btnSimpanBarang" onclick="simpanBarang()">> SIMPAN BARANG</button><button class="btn bd hidden" id="btnBatalBarang" onclick="batalBarang()">> BATAL EDIT BARANG</button>
+<p id="msgBarang" style="font-size:9px;text-align:center;color:#ff8800"></p>
+<div id="listBarang" style="margin-top:8px"></div>
+</div>
+
+<!-- CARD PENGUNJUNG BARU -->
+<div class="card" style="border-color:#00ffff"><b style="color:#00ffff">> DATA PENGUNJUNG SITE.exe</b>
+<div class="dash"><div class="dbox"><small>TOTAL KUNJUNGAN</small><br><b id="totalVisit" style="color:#ffff00;font-size:16px">0</b></div><div class="dbox"><small>HARI INI</small><br><b id="todayVisit" style="color:#22c55e;font-size:16px">0</b></div></div>
+<div id="listPengunjung" style="max-height:180px;overflow:auto;margin-top:8px;font-size:9px"></div>
+<div style="font-size:7px;color:#888;margin-top:4px">* Otomatis catat tiap warga/admin login</div>
+</div>
 
 <div class="card" style="border-color:#ffff00"><b id="formTitle">> TAMBAH_DATA.exe</b><input id="nama" placeholder="> Nama"><input id="wa" placeholder="> WA"><div style="display:flex;gap:4px"><input id="nom" type="number" value="50000"><select id="jenis"><option value="in">MASUK</option><option value="out">KELUAR</option></select></div>
 <div class="months" id="monthGrid"></div>
 <div style="display:flex;gap:4px;margin-top:6px"><button class="btn b10" style="font-size:8px" onclick="pilihBulan(10)">10 BLN LUNAS</button><button class="btn" style="font-size:8px" onclick="pilihBulan(12)">12 FULL</button><button class="btn bd" style="font-size:8px" onclick="clearBulan()">CLEAR</button></div>
 <div style="text-align:center;margin-top:6px"><small style="color:#22c55e">TOTAL: <b id="totalBayar">Rp 0</b> (<span id="jmlBulan">0</span>)</small></div>
-<button class="btn bg" id="btnSimpan" onclick="simpanData()">> SIMPAN_DATA</button><button class="btn bd hidden" id="btnBatal" onclick="batalEdit()">> BATAL EDIT</button>
+<button class="btn bg" id="btnSimpan" onclick="simpanData()">> SIMPAN_DATA (AUTO)</button><button class="btn bd hidden" id="btnBatal" onclick="batalEdit()">> BATAL EDIT</button>
 <p id="msg" style="font-size:9px;text-align:center"></p>
-<div style="display:flex;gap:4px"><button class="btn" style="font-size:8px;background:#222" onclick="import105()">📥 IMPORT 105</button><button class="btn" style="font-size:8px;background:#222" onclick="syncAll()">☁️ SYNC</button><button class="btn" style="font-size:8px;background:#222" onclick="forceRender()">🔄 REFRESH LIST</button></div>
+<div style="display:flex;gap:4px"><button class="btn" style="font-size:8px;background:#222" onclick="import105()">📥 IMPORT 105</button><button class="btn" style="font-size:8px;background:#222" onclick="syncAll()">☁️ SYNC KAS</button><button class="btn" style="font-size:8px;background:#222" onclick="syncBarang()">☁️ SYNC BARANG</button><button class="btn" style="font-size:8px;background:#222" onclick="forceRender()">🔄 REFRESH</button></div>
 </div>
 
 <div class="card"><b style="color:#00ffff">> DATABASE (<span id="jml">0</span>) <span id="mode" style="font-size:9px;color:#22c55e"></span></b><input id="cari" placeholder="> CARI NAMA... ketik disini" onkeyup="render()" style="margin-top:8px;border-color:#00ffff"><div id="listWarga" style="margin-top:8px;min-height:200px"></div></div></div>
 
 <div id="warga" class="hidden"><div style="padding:10px;background:#000;border-bottom:2px solid #22c55e;display:flex;justify-content:space-between;color:#22c55e"><b id="wNama">WARGA</b><button onclick="logout()" style="background:#22c55e;color:#000;border:none;padding:5px 10px">EXIT</button></div>
 <div class="card" style="border-color:#22c55e"><div style="text-align:center"><small>Total Kas</small><h2 id="wTotal" style="color:#ffff00;margin:4px 0">Rp 0</h2></div><div id="wStatus" style="padding:8px;background:#000;border:1px dashed #22c55e;font-size:11px;margin-top:8px"></div></div>
+<div class="card" style="border-color:#ff8800"><b style="color:#ff8800">> INVENTARIS BARANG</b><div id="wListBarang"></div></div>
 <div class="card"><b>> DAFTAR WARGA</b><input id="cariW" placeholder="> CARI..." onkeyup="renderWarga()"><div id="wList" style="margin-top:8px"></div></div>
 </div>
 
@@ -29,7 +45,9 @@ body{margin:0;font-family:'Courier New',monospace;background:#000}.box{max-width
 <script>
 var firebaseConfig={apiKey:"AIzaSyBykYOwRYyKNKkb0-tYblcwwDABWMnN4ko",authDomain:"blokb-online.firebaseapp.com",databaseURL:"https://blokb-online-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"blokb-online",storageBucket:"blokb-online.firebasestorage.app",messagingSenderId:"589827226624",appId:"1:589827226624:web:742737eae422e111b8ace5"};
 firebase.initializeApp(firebaseConfig);var db=firebase.database();
-var data=JSON.parse(localStorage.getItem('kartar_data')||'[]'); var selectedMonths=[]; var editIdx=-1; var currentUser='';
+var data=JSON.parse(localStorage.getItem('kartar_data')||'[]');
+var barang=JSON.parse(localStorage.getItem('kartar_barang')||'[]');
+var selectedMonths=[]; var editIdx=-1; var editBarangIdx=-1; var currentUser='';
 var allWarga=[{name:"Rini",bulan:[9,10],nom:50000,jenis:"in"},{name:"Veni",bulan:[],nom:0,jenis:"in"},{name:"Danda",bulan:[9],nom:50000,jenis:"in"},{name:"Jeki",bulan:[9],nom:50000,jenis:"in"},{name:"Pesek",bulan:[9,10],nom:50000,jenis:"in"},{name:"IZA",bulan:[9],nom:50000,jenis:"in"},{name:"Linda",bulan:[9],nom:50000,jenis:"in"},{name:"Aldi",bulan:[9,10],nom:50000,jenis:"in"},{name:"Alfin",bulan:[9],nom:50000,jenis:"in"},{name:"Vicky",bulan:[],nom:0,jenis:"in"},{name:"Fedy",bulan:[9],nom:50000,jenis:"in"},{name:"Farid",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Ghang",bulan:[],nom:0,jenis:"in"},{name:"Bella",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Rokim",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Lusi",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Wilda",bulan:[],nom:0,jenis:"in"},{name:"Sholeh",bulan:[],nom:0,jenis:"in"},{name:"AAN",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Parmo",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Indah",bulan:[9],nom:50000,jenis:"in"},{name:"Putri",bulan:[9,10,11,12,1,2,3,4,5,6,7,8],nom:50000,jenis:"in"},{name:"Elen",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Efin",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Fatar",bulan:[9,10,11,12,1,2,3],nom:50000,jenis:"in"},{name:"Azil",bulan:[9,10,11,12,1,2,3],nom:50000,jenis:"in"},{name:"JAYA",bulan:[9,10],nom:50000,jenis:"in"},{name:"Ofi",bulan:[9],nom:50000,jenis:"in"},{name:"Azis",bulan:[9],nom:50000,jenis:"in"},{name:"Chika",bulan:[],nom:0,jenis:"in"},{name:"Ditta Rw",bulan:[9],nom:50000,jenis:"in"},{name:"Pingkan",bulan:[9],nom:50000,jenis:"in"},{name:"Meli",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000,jenis:"in"},{name:"Amel",bulan:[9],nom:50000,jenis:"in"},{name:"Akdi",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Riko",bulan:[],nom:0,jenis:"in"},{name:"Eriko",bulan:[9],nom:50000,jenis:"in"},{name:"Yusuf",bulan:[9],nom:50000,jenis:"in"},{name:"Andre",bulan:[],nom:0,jenis:"in"},{name:"MEGA",bulan:[9],nom:50000,jenis:"in"},{name:"SARMA",bulan:[9],nom:50000,jenis:"in"},{name:"Wiwin",bulan:[9],nom:50000,jenis:"in"},{name:"BETI",bulan:[9],nom:50000,jenis:"in"},{name:"TOHA",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"BIMA",bulan:[9,10],nom:50000,jenis:"in"},{name:"BAYU",bulan:[9],nom:50000,jenis:"in"},{name:"Cindy",bulan:[],nom:0,jenis:"in"},{name:"Vega",bulan:[9],nom:50000,jenis:"in"},{name:"TRI",bulan:[9],nom:50000,jenis:"in"},{name:"PRAS",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Chelwin",bulan:[9],nom:50000,jenis:"in"},{name:"Trevi",bulan:[9],nom:50000,jenis:"in"},{name:"Ayu",bulan:[9,10],nom:50000,jenis:"in"},{name:"NURI YATI",bulan:[9,10],nom:50000,jenis:"in"},{name:"Helen",bulan:[9],nom:50000,jenis:"in"},{name:"Rizal",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Sigit",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Tia",bulan:[9,10],nom:50000,jenis:"in"},{name:"Dini",bulan:[],nom:0,jenis:"in"},{name:"Sinta",bulan:[9,10,11,12,1,2],nom:50000,jenis:"in"},{name:"Devi",bulan:[9],nom:50000,jenis:"in"},{name:"Arum",bulan:[9,10,11,12],nom:50000,jenis:"in"},{name:"Vian",bulan:[],nom:0,jenis:"in"},{name:"ARIS",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"BAGAM",bulan:[9],nom:50000,jenis:"in"},{name:"Dimas kebab",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000,jenis:"in"},{name:"Robin",bulan:[9,10,11,12,1,2],nom:50000,jenis:"in"},{name:"Ariz",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Luffi",bulan:[9],nom:50000,jenis:"in"},{name:"Vita",bulan:[9],nom:50000,jenis:"in"},{name:"Shukron",bulan:[9],nom:50000,jenis:"in"},{name:"Dimas E",bulan:[9,10],nom:50000,jenis:"in"},{name:"Hamzah",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Adi",bulan:[9,10],nom:50000,jenis:"in"},{name:"Andi",bulan:[9],nom:50000,jenis:"in"},{name:"Dira Jan",bulan:[9],nom:50000,jenis:"in"},{name:"Alif",bulan:[9,10],nom:50000,jenis:"in"},{name:"IRUL",bulan:[9],nom:50000,jenis:"in"},{name:"Radit",bulan:[9],nom:50000,jenis:"in"},{name:"Rehan",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Hengki",bulan:[9],nom:50000,jenis:"in"},{name:"Aldo",bulan:[9],nom:50000,jenis:"in"},{name:"Ratih",bulan:[9],nom:50000,jenis:"in"},{name:"Rian kiwir",bulan:[9],nom:50000,jenis:"in"},{name:"Adi S",bulan:[],nom:0,jenis:"in"},{name:"Feri",bulan:[],nom:0,jenis:"in"},{name:"Rian lor",bulan:[9],nom:50000,jenis:"in"},{name:"Shinta k",bulan:[9],nom:50000,jenis:"in"},{name:"Wulan",bulan:[9],nom:50000,jenis:"in"},{name:"Sabrol",bulan:[],nom:0,jenis:"in"},{name:"Bella k",bulan:[9],nom:50000,jenis:"in"},{name:"Siti kidol",bulan:[],nom:0,jenis:"in"},{name:"Edi",bulan:[9],nom:50000,jenis:"in"},{name:"Anwar",bulan:[9],nom:50000,jenis:"in"},{name:"Novita I",bulan:[9],nom:50000,jenis:"in"},{name:"Dilla",bulan:[9],nom:50000,jenis:"in"},{name:"Yunus",bulan:[9],nom:50000,jenis:"in"},{name:"Vina Pc ageng",bulan:[],nom:0,jenis:"in"},{name:"Galepong",bulan:[9,10,11,12],nom:50000,jenis:"in"},{name:"Rio",bulan:[9],nom:50000,jenis:"in"},{name:"Cak Opek",bulan:[9],nom:50000,jenis:"in"},{name:"Nikmah",bulan:[9,10],nom:50000,jenis:"in"},{name:"ADE",bulan:[9,10],nom:50000,jenis:"in"},{name:"LESTA",bulan:[9],nom:50000,jenis:"in"},{name:"Kacung",bulan:[],nom:0,jenis:"in"},{name:"Yari Muri",bulan:[9],nom:50000,jenis:"in"}];
 
 function buildMonths(){ var grid=document.getElementById('monthGrid'); if(!grid) return; var labels={9:'SEP',10:'OKT',11:'NOV',12:'DES',1:'JAN',2:'FEB',3:'MAR',4:'APR',5:'MEI',6:'JUN',7:'JUL',8:'AGU'}; var order=[9,10,11,12,1,2,3,4,5,6,7,8]; var h=''; for(var i=0;i<order.length;i++){ var b=order[i]; h+='<div class="mchk" id="m'+b+'" onclick="toggleMonth('+b+')">'+labels[b]+'</div>'; } grid.innerHTML=h; }
@@ -40,9 +58,11 @@ function refreshMonthUI(){ var order=[9,10,11,12,1,2,3,4,5,6,7,8]; for(var i=0;i
 function updateTotal(){ var per=parseInt(document.getElementById('nom').value)||0; var jenis=(document.getElementById('jenis')?document.getElementById('jenis').value:'in'); if(jenis==='out'){ document.getElementById('totalBayar').innerText='Rp '+per.toLocaleString('id-ID'); document.getElementById('jmlBulan').innerText='keluar'; } else { document.getElementById('totalBayar').innerText='Rp '+(per*selectedMonths.length).toLocaleString('id-ID'); document.getElementById('jmlBulan').innerText=selectedMonths.length+' bln'; } }
 function safeBulan(d){ if(!d ||!d.bulan ||!Array.isArray(d.bulan)) return []; return d.bulan; }
 function safeNom(d){ var n=parseInt(d.nom); if(isNaN(n)) return 0; return n; }
+function catatPengunjung(nama,role){ try{ db.ref('pengunjung').push({nama:nama, role:role, tgl:new Date().toLocaleString('id-ID'), waktu:Date.now()}); db.ref('stats/total_visit').transaction(function(c){ return (c||0)+1; }); }catch(e){} }
 
+// LISTENER KAS
 db.ref('kartar').on('value',function(s){
-  document.getElementById('conn').innerText='CONNECTED OK - '+new Date().toLocaleTimeString();
+  document.getElementById('conn').innerText='CONNECTED OK - '+new Date().toLocaleTimeString()+' - AUTO ON';
   var m=document.getElementById('mode'); if(m){m.innerText='ONLINE';}
   if(s.val()){
     var val=s.val(); var arr=[];
@@ -53,10 +73,45 @@ db.ref('kartar').on('value',function(s){
   render();
 },function(e){ document.getElementById('conn').innerText='OFFLINE: '+e.message; render(); });
 
+// LISTENER BARANG
+db.ref('barang').on('value',function(s){
+  if(s.val()){
+    var val=s.val(); var arr=[];
+    if(Array.isArray(val)){ for(var i=0;i<val.length;i++){ if(val[i] && val[i].nama) arr.push(val[i]); } }
+    else { for(var k in val){ if(val[k] && val[k].nama) arr.push(val[k]); } }
+    barang=arr; localStorage.setItem('kartar_barang',JSON.stringify(barang)); renderBarang();
+  }
+});
+
+// LISTENER PENGUNJUNG
+db.ref('stats/total_visit').on('value',function(s){ var el=document.getElementById('totalVisit'); if(el) el.innerText=s.val()||0; });
+db.ref('pengunjung').limitToLast(20).on('value',function(s){
+  var val=s.val(); if(!val) return;
+  var arr=Object.values(val).reverse();
+  var today=new Date().toLocaleDateString('id-ID');
+  var todayCount=0; for(var i=0;i<arr.length;i++){ if(arr[i].tgl && arr[i].tgl.indexOf(today)!==-1) todayCount++; }
+  var tv=document.getElementById('todayVisit'); if(tv) tv.innerText=todayCount;
+  var html=''; for(var j=0;j<arr.length;j++){ html+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed #333"><span style="color:#00ffff">'+arr[j].nama+' ('+arr[j].role+')</span><small style="color:#888">'+(arr[j].tgl||'')+'</small></div>'; }
+  var lp=document.getElementById('listPengunjung'); if(lp) lp.innerHTML=html;
+});
+
 function import105(){ data=allWarga; localStorage.setItem('kartar_data',JSON.stringify(data)); syncAll(); render(); document.getElementById('msg').innerText='✅ IMPORT 105 BERHASIL - LIST MUNCUL'; }
-function syncAll(){ if(data.length==0) return; db.ref('kartar').set(data).then(function(){document.getElementById('msg').innerText='✅ SYNC OK '+data.length;}); }
-function forceRender(){ render(); document.getElementById('msg').innerText='🔄 REFRESH OK - '+data.length+' data'; }
+function syncAll(){ if(data.length==0) return; document.getElementById('saveStatus').innerText='⏳ SAVING KAS...'; db.ref('kartar').set(data).then(function(){ document.getElementById('saveStatus').innerText='✅ KAS TERSIMPAN'; document.getElementById('msg').innerText='✅ SYNC OK '+data.length+' warga'; }); }
+function syncBarang(){ if(barang.length==0){ document.getElementById('msgBarang').innerText='Belum ada barang'; return; } db.ref('barang').set(barang).then(function(){ document.getElementById('msgBarang').innerText='✅ SYNC BARANG OK '+barang.length+' item'; }); }
+function forceRender(){ render(); renderBarang(); document.getElementById('msg').innerText='🔄 REFRESH OK - '+data.length+' kas, '+barang.length+' barang'; }
 function hitung(){ var masuk=0,keluar=0,lunas10=0,belum=0; for(var i=0;i<data.length;i++){ var d=data[i]; if(!d) continue; var bln=safeBulan(d).length; var nom=safeNom(d); if(d.jenis==='out'){ keluar+=nom; } else { masuk+=bln*nom; if(bln>=10) lunas10++; if(bln===0) belum++; } } return{masuk,keluar,saldo:masuk-keluar,lunas10,belum}; }
+
+function renderBarang(){
+  document.getElementById('totalBarang').innerText=barang.length;
+  var html='';
+  for(var i=0;i<barang.length;i++){
+    var b=barang[i]; if(!b ||!b.nama) continue;
+    var col=b.kondisi && b.kondisi.toLowerCase().indexOf('rusak')!==-1?'#ef4444':'#22c55e';
+    html+='<div class="item"><div style="flex:1"><b style="color:#ff8800">'+b.nama+'</b> <small style="background:'+col+';color:#000;padding:2px 5px;border-radius:3px;font-size:8px">'+(b.kondisi||'Baik')+'</small><br><small style="color:#888">'+b.jml+' '+b.satuan+' • '+(b.ket||'')+' • Rp '+(parseInt(b.harga)||0).toLocaleString('id-ID')+'</small></div><div style="text-align:right"><button onclick="editBarang('+i+')" style="background:#ffff00;color:#000;border:none;padding:3px 6px;font-size:8px">EDIT</button> <button onclick="hapusBarang('+i+')" style="background:#ff8800;color:#000;border:none;padding:3px 6px;font-size:8px">DEL</button></div></div>';
+  }
+  document.getElementById('listBarang').innerHTML=html||'<div style="padding:8px;text-align:center;color:#888;font-size:9px">Belum ada barang - tambah Sound, Kursi dll</div>';
+  var wlb=document.getElementById('wListBarang'); if(wlb) wlb.innerHTML=html||'<div style="padding:8px;text-align:center;color:#888">Belum ada barang</div>';
+}
 
 function render(){
   try{
@@ -73,14 +128,11 @@ function render(){
     document.getElementById('jml').innerText=data.length;
 
     var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase().trim();
-    var listHtml='';
-    var countShow=0;
+    var listHtml=''; var countShow=0;
     for(var i=0;i<data.length;i++){
       var d=data[i]; if(!d ||!d.name) continue;
       if(q && d.name.toLowerCase().indexOf(q)===-1) continue;
-      var bln=safeBulan(d).length;
-      var nom=safeNom(d);
-      var isOut=d.jenis==='out';
+      var bln=safeBulan(d).length; var nom=safeNom(d); var isOut=d.jenis==='out';
       var badge=isOut?'KELUAR':bln>=10?'10 BLN LUNAS':bln>=1?bln+' BLN':'BELUM';
       var col=isOut?'#ef4444':bln>=10?'#22c55e':bln>=1?'#00ffff':'#ef4444';
       var totalRp=isOut?nom:bln*nom;
@@ -89,16 +141,10 @@ function render(){
     }
     if(countShow===0 && data.length>0 && q!==''){ listHtml='<div style="padding:20px;text-align:center;color:#888">Tidak ada hasil untuk "'+q+'"</div>'; }
     else if(data.length===0){ listHtml='<div style="padding:20px;text-align:center;color:#ef4444">DATA KOSONG - KLIK 📥 IMPORT 105</div>'; }
-    else if(countShow===0){ listHtml='<div style="padding:20px;text-align:center;color:#888">List kosong, klik REFRESH LIST</div>'; }
-
     document.getElementById('listWarga').innerHTML=listHtml;
-    renderWarga();
-  }catch(err){
-    document.getElementById('listWarga').innerHTML='<div style="color:#ef4444;padding:10px">ERROR RENDER: '+err.message+'</div>';
-    console.error(err);
-  }
+    renderWarga(); renderBarang();
+  }catch(err){ document.getElementById('listWarga').innerHTML='<div style="color:#ef4444;padding:10px">ERROR: '+err.message+'</div>'; }
 }
-
 function renderWarga(){
   try{
     var q=(document.getElementById('cariW')?document.getElementById('cariW').value:'').toLowerCase().trim();
@@ -107,8 +153,7 @@ function renderWarga(){
     for(var i=0;i<data.length;i++){
       var d=data[i]; if(!d ||!d.name || d.jenis==='out') continue;
       if(q && d.name.toLowerCase().indexOf(q)===-1) continue;
-      var bln=safeBulan(d).length;
-      var col=bln>=10?'#22c55e':bln>=1?'#00ffff':'#ef4444';
+      var bln=safeBulan(d).length; var col=bln>=10?'#22c55e':bln>=1?'#00ffff':'#ef4444';
       list+='<div class="item"><div><b style="color:'+col+'">'+d.name+'</b><br><small style="color:#888">'+(safeBulan(d).join(', ')||'Belum')+'</small></div><div style="text-align:right"><b style="color:'+col+'">Rp '+(bln*safeNom(d)).toLocaleString('id-ID')+'</b><br><small>'+bln+' bln</small></div></div>';
     }
     var wl=document.getElementById('wList'); if(wl) wl.innerHTML=list||'<div style="padding:10px;text-align:center;color:#888">Kosong</div>';
@@ -119,34 +164,40 @@ function renderWarga(){
   }catch(e){}
 }
 
+// BARANG FUNGSI
+function simpanBarang(){
+  var nama=document.getElementById('namaBarang').value.trim();
+  var jml=parseInt(document.getElementById('jmlBarang').value)||1;
+  var kondisi=document.getElementById('kondisiBarang').value.trim()||'Baik';
+  var satuan=document.getElementById('satuanBarang').value;
+  var harga=parseInt(document.getElementById('hargaBarang').value)||0;
+  var ket=document.getElementById('ketBarang').value.trim();
+  if(!nama){alert('Nama barang wajib!');return;}
+  var obj={nama:nama,jml:jml,kondisi:kondisi,satuan:satuan,harga:harga,ket:ket,tgl:Date.now()};
+  if(editBarangIdx>=0){ barang[editBarangIdx]=obj; editBarangIdx=-1; document.getElementById('btnSimpanBarang').innerText='> SIMPAN BARANG'; document.getElementById('btnBatalBarang').classList.add('hidden'); }
+  else barang.push(obj);
+  localStorage.setItem('kartar_barang',JSON.stringify(barang));
+  document.getElementById('namaBarang').value=''; document.getElementById('jmlBarang').value='1'; document.getElementById('kondisiBarang').value=''; document.getElementById('hargaBarang').value=''; document.getElementById('ketBarang').value='';
+  renderBarang(); syncBarang();
+}
+function editBarang(i){ var b=barang[i]; if(!b) return; editBarangIdx=i; document.getElementById('namaBarang').value=b.nama; document.getElementById('jmlBarang').value=b.jml; document.getElementById('kondisiBarang').value=b.kondisi; document.getElementById('satuanBarang').value=b.satuan; document.getElementById('hargaBarang').value=b.harga; document.getElementById('ketBarang').value=b.ket; document.getElementById('btnSimpanBarang').innerText='> UPDATE BARANG'; document.getElementById('btnBatalBarang').classList.remove('hidden'); window.scrollTo(0,150); }
+function batalBarang(){ editBarangIdx=-1; document.getElementById('namaBarang').value=''; document.getElementById('btnSimpanBarang').innerText='> SIMPAN BARANG'; document.getElementById('btnBatalBarang').classList.add('hidden'); }
+function hapusBarang(i){ if(!confirm('Hapus barang '+barang[i].nama+'?')) return; barang.splice(i,1); localStorage.setItem('kartar_barang',JSON.stringify(barang)); renderBarang(); syncBarang(); }
+
 function simpanData(){
-  var n=document.getElementById('nama').value.trim();
-  var w=document.getElementById('wa').value.trim();
-  var nom=parseInt(document.getElementById('nom').value)||0;
-  var jenis=(document.getElementById('jenis')?document.getElementById('jenis').value:'in');
-  if(!n){alert('Nama wajib');return;}
-  if(jenis==='in' && selectedMonths.length===0){alert('Pilih bulan! Klik 10 BLN LUNAS');return;}
+  var n=document.getElementById('nama').value.trim(); var w=document.getElementById('wa').value.trim(); var nom=parseInt(document.getElementById('nom').value)||0; var jenis=(document.getElementById('jenis')?document.getElementById('jenis').value:'in');
+  if(!n){alert('Nama wajib');return;} if(jenis==='in' && selectedMonths.length===0){alert('Pilih bulan!');return;}
   var obj={name:n,wa:w,nom:nom,bulan:jenis==='in'?selectedMonths.slice():[],jenis:jenis,tgl:Date.now()};
-  if(editIdx>=0){ data[editIdx]=obj; editIdx=-1; document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA'; document.getElementById('btnBatal').classList.add('hidden'); }
-  else data.push(obj);
-  localStorage.setItem('kartar_data',JSON.stringify(data));
-  document.getElementById('nama').value=''; clearBulan(); render(); syncAll();
-  document.getElementById('msg').innerText='✅ SAVED '+n;
+  if(editIdx>=0){ data[editIdx]=obj; editIdx=-1; document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA (AUTO)'; document.getElementById('btnBatal').classList.add('hidden'); } else data.push(obj);
+  localStorage.setItem('kartar_data',JSON.stringify(data)); document.getElementById('nama').value=''; clearBulan(); render(); syncAll(); document.getElementById('msg').innerText='✅ SAVED '+n;
 }
-function editData(i){
-  if(!data[i]) return;
-  var d=data[i]; editIdx=i;
-  document.getElementById('nama').value=d.name||''; document.getElementById('wa').value=d.wa||''; document.getElementById('nom').value=d.nom||50000; if(document.getElementById('jenis')) document.getElementById('jenis').value=d.jenis||'in';
-  selectedMonths=safeBulan(d).slice(); refreshMonthUI(); updateTotal();
-  document.getElementById('formTitle').innerText='> EDIT '+d.name; document.getElementById('btnSimpan').innerText='> UPDATE'; document.getElementById('btnBatal').classList.remove('hidden');
-  window.scrollTo(0,200);
-}
-function batalEdit(){ editIdx=-1; document.getElementById('nama').value=''; clearBulan(); document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA'; document.getElementById('btnBatal').classList.add('hidden'); }
+function editData(i){ if(!data[i]) return; var d=data[i]; editIdx=i; document.getElementById('nama').value=d.name||''; document.getElementById('wa').value=d.wa||''; document.getElementById('nom').value=d.nom||50000; if(document.getElementById('jenis')) document.getElementById('jenis').value=d.jenis||'in'; selectedMonths=safeBulan(d).slice(); refreshMonthUI(); updateTotal(); document.getElementById('formTitle').innerText='> EDIT '+d.name; document.getElementById('btnSimpan').innerText='> UPDATE'; document.getElementById('btnBatal').classList.remove('hidden'); window.scrollTo(0,400); }
+function batalEdit(){ editIdx=-1; document.getElementById('nama').value=''; clearBulan(); document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA (AUTO)'; document.getElementById('btnBatal').classList.add('hidden'); }
 function hapusData(i){ if(!confirm('Hapus '+(data[i]?data[i].name:'')+'?')) return; data.splice(i,1); localStorage.setItem('kartar_data',JSON.stringify(data)); render(); syncAll(); }
-function loginWarga(){ var n=document.getElementById('namaWarga').value.trim(); if(!n) return alert('Ketik namamu!'); currentUser=n; localStorage.setItem('user',n); localStorage.removeItem('admin'); document.getElementById('login').classList.add('hidden'); document.getElementById('admin').classList.add('hidden'); document.getElementById('warga').classList.remove('hidden'); document.getElementById('wNama').innerText=n.toUpperCase()+' (WARGA)'; renderWarga(); }
-function loginAdmin(){ var p=document.getElementById('pass').value.trim(); if(p!=='blokb2026') return alert('Password salah!'); localStorage.setItem('admin','1'); document.getElementById('login').classList.add('hidden'); document.getElementById('warga').classList.add('hidden'); document.getElementById('admin').classList.remove('hidden'); buildMonths(); render(); }
+function loginWarga(){ var n=document.getElementById('namaWarga').value.trim(); if(!n) return alert('Ketik namamu!'); currentUser=n; localStorage.setItem('user',n); localStorage.removeItem('admin'); catatPengunjung(n,'WARGA'); document.getElementById('login').classList.add('hidden'); document.getElementById('admin').classList.add('hidden'); document.getElementById('warga').classList.remove('hidden'); document.getElementById('wNama').innerText=n.toUpperCase()+' (WARGA)'; renderWarga(); renderBarang(); }
+function loginAdmin(){ var p=document.getElementById('pass').value.trim(); if(p!=='blokb2026') return alert('Password salah!'); localStorage.setItem('admin','1'); catatPengunjung('ADMIN','ADMIN'); document.getElementById('login').classList.add('hidden'); document.getElementById('warga').classList.add('hidden'); document.getElementById('admin').classList.remove('hidden'); buildMonths(); render(); }
 function logout(){ localStorage.removeItem('admin'); localStorage.removeItem('user'); location.reload(); }
 if(localStorage.getItem('admin')==='1'){ document.getElementById('login').classList.add('hidden'); document.getElementById('admin').classList.remove('hidden'); }
 else if(localStorage.getItem('user')){ currentUser=localStorage.getItem('user'); document.getElementById('login').classList.add('hidden'); document.getElementById('warga').classList.remove('hidden'); document.getElementById('wNama').innerText=currentUser.toUpperCase()+' (WARGA)'; }
-buildMonths(); updateTotal(); render();
+buildMonths(); updateTotal(); render(); renderBarang();
 </script></body></html>
