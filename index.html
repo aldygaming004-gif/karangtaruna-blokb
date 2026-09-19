@@ -1,129 +1,103 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR V19 10 BULAN</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>
-body{margin:0;font-family:'Courier New',monospace;background:#000;overflow-x:hidden}.glitch-bg{position:fixed;inset:0;z-index:-2;background:#000}.glitch-bg:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,0,255,.15) 2px 3px,rgba(0,255,255,.15) 3px 4px,rgba(255,255,0,.15) 4px 5px);animation:scan.2s infinite}.glitch-bg:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 30%,rgba(255,0,255,.1) 50%,transparent 70%);animation:shift 1.5s infinite}@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(5px)}}@keyframes shift{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}.box{max-width:430px;margin:0 auto;min-height:100vh;position:relative}.card{margin:12px;border-radius:4px;padding:14px;background:rgba(0,0,0,.85);border:2px solid #ff00ff;box-shadow:0 0 10px #ff00ff,0 0 20px #00ffff inset;color:#fff;position:relative;overflow:hidden}.card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00,#ff00ff);animation:hue 2s linear infinite}.btn{width:100%;padding:14px;border-radius:0;border:2px solid #00ffff;background:#000;color:#00ffff;font-weight:900;margin-top:8px;letter-spacing:2px;text-transform:uppercase;box-shadow:0 0 10px #00ffff;cursor:pointer}.btn:hover{background:#00ffff;color:#000}.bg{border-color:#ffff00;color:#ffff00;box-shadow:0 0 10px #ffff00}.bg:hover{background:#ffff00;color:#000}.b10{border-color:#22c55e;color:#22c55e;box-shadow:0 0 10px #22c55e}.b10:hover{background:#22c55e;color:#000}input,select{width:100%;padding:12px;background:#000;color:#00ffff;border:2px solid #ff00ff;margin-top:6px;box-sizing:border-box;font-family:'Courier New'}.item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed #ff00ff;font-size:11px}.hidden{display:none!important}h1{color:#fff;text-shadow:2px 0 #ff00ff,-2px 0 #00ffff}.glitch-text{animation:glitch.3s infinite}@keyframes glitch{0%{text-shadow:2px 0 #ff00ff,-2px 0 #00ffff}50%{text-shadow:-2px 0 #ff00ff,2px 0 #ffff00}}@keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}.months{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:8px}.mchk{background:#111;border:1px solid #ff00ff;padding:6px 2px;text-align:center;font-size:10px;cursor:pointer;color:#00ffff}.mchk.active{background:#ffff00;color:#000;border-color:#ffff00;box-shadow:0 0 8px #ffff00}
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KARTAR V20 FIX EDIT+DASHBOARD</title><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script><style>
+body{margin:0;font-family:'Courier New',monospace;background:#000;overflow-x:hidden}.glitch-bg{position:fixed;inset:0;z-index:-2;background:#000}.glitch-bg:before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,0,255,.15) 2px 3px,rgba(0,255,255,.15) 3px 4px,rgba(255,255,0,.15) 4px 5px);animation:scan.2s infinite}.box{max-width:430px;margin:0 auto;min-height:100vh;position:relative}.card{margin:10px;border-radius:4px;padding:12px;background:rgba(0,0,0,.9);border:2px solid #ff00ff;box-shadow:0 0 10px #ff00ff;color:#fff}.btn{width:100%;padding:12px;border:2px solid #00ffff;background:#000;color:#00ffff;font-weight:900;margin-top:6px;letter-spacing:1px;cursor:pointer}.bg{border-color:#ffff00;color:#ffff00}.b10{border-color:#22c55e;color:#22c55e}.bd{border-color:#ff00ff;color:#ff00ff}input,select{width:100%;padding:10px;background:#000;color:#00ffff;border:2px solid #ff00ff;margin-top:5px;box-sizing:border-box;font-family:'Courier New'}.item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed #ff00ff;font-size:11px}.hidden{display:none!important}.months{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:6px}.mchk{background:#111;border:1px solid #ff00ff;padding:6px 2px;text-align:center;font-size:10px;cursor:pointer;color:#00ffff}.mchk.active{background:#ffff00;color:#000;border-color:#ffff00;box-shadow:0 0 8px #ffff00}.dash{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.dbox{background:#111;border:1px solid #00ffff;padding:8px;text-align:center}.dbox b{font-size:14px;display:block}.dbox small{font-size:8px;opacity:.7}
 </style></head><body><div class="glitch-bg"></div><div class="box">
-<div id="login" style="padding:20px;text-align:center;min-height:100vh"><h1 class="glitch-text">KARTAR<br>BLOK B</h1><p style="color:#00ffff;font-size:9px;letter-spacing:3px">V19 - 10 BULAN FEATURE // 105 WARGA</p><div class="card" style="text-align:left;margin-top:20px"><b style="color:#ffff00">> LOGIN</b><input id="pass" placeholder="> blokb2026 / nama"><button class="btn" onclick="doLogin()">> MASUK</button><p id="conn" style="font-size:8px;color:#ff00ff;text-align:center;margin-top:8px"></p></div></div>
-<div id="admin" class="hidden"><div style="padding:12px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b class="glitch-text">ADMIN_V19 • <span id="totalW">0</span> • <span id="mode" style="font-size:9px"></span></b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:6px 12px;font-size:10px">EXIT</button></div>
-<div class="card"><h2 id="aTotal" style="color:#ffff00;text-align:center;text-shadow:0 0 10px #ffff00">Rp 0</h2><div id="aList"></div>
-<div style="margin-top:12px;padding:12px;background:#000;border:2px solid #ffff00"><b style="color:#ffff00">> TAMBAH_DATA.exe - 10 BULAN</b>
-<input id="nama" placeholder="> Nama">
-<input id="wa" placeholder="> WA 628...">
-<div style="display:flex;gap:4px;margin-top:6px"><input id="nom" type="number" value="50000" placeholder="> Nominal per bulan" style="margin-top:0"><span style="padding:12px;background:#111;border:2px solid #ff00ff;color:#ffff00;font-size:11px">/bln</span></div>
+<div id="login" style="padding:20px;text-align:center;min-height:100vh"><h1 style="color:#fff;text-shadow:2px 0 #ff00ff,-2px 0 #00ffff">KARTAR BLOK B</h1><p style="color:#00ffff;font-size:9px">V20 FIX EDIT + DASHBOARD + 10 BLN</p><div class="card" style="text-align:left"><b style="color:#ffff00">> LOGIN</b><input id="pass" placeholder="> blokb2026"><button class="btn" onclick="doLogin()">> MASUK</button><p id="conn" style="font-size:8px;color:#ff00ff;text-align:center"></p></div></div>
+<div id="admin" class="hidden"><div style="padding:10px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b>ADMIN_V20 FIX</b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:5px 10px">EXIT</button></div>
 
-<b style="color:#00ffff;font-size:10px;margin-top:10px;display:block">> PILIH BULAN (9=Sep 2024 - 8=Agu 2025):</b>
-<div class="months" id="monthGrid"></div>
-<div style="display:flex;gap:4px;margin-top:8px">
-<button class="btn b10" style="font-size:9px;padding:8px" onclick="pilihBulan(10)">> 10 BULAN LUNAS</button>
-<button class="btn" style="font-size:9px;padding:8px" onclick="pilihBulan(12)">> 12 BULAN FULL</button>
-<button class="btn" style="font-size:9px;padding:8px;border-color:#ef4444;color:#ef4444" onclick="clearBulan()">> CLEAR</button>
+<div class="card" style="border-color:#ffff00;box-shadow:0 0 10px #ffff00">
+<div style="text-align:center"><small style="color:#00ffff">> TOTAL KAS KARANG TARUNA</small><h2 id="aTotal" style="color:#ffff00;margin:4px 0;font-size:24px;text-shadow:0 0 10px #ffff00">Rp 0</h2></div>
+<div class="dash">
+<div class="dbox" style="border-color:#22c55e"><small>PEMASUKAN (IURAN)</small><b id="pemasukan" style="color:#22c55e">Rp 0</b><small id="jmlLunas">0 lunas 10 bln</small></div>
+<div class="dbox" style="border-color:#ef4444"><small>PENGELUARAN</small><b id="pengeluaran" style="color:#ef4444">Rp 0</b><small id="jmlKeluar">0 transaksi</small></div>
+<div class="dbox"><small>TOTAL WARGA</small><b id="totalW" style="color:#00ffff">0</b><small>105 target</small></div>
+<div class="dbox"><small>BELUM BAYAR</small><b id="belum" style="color:#ef4444">0</b><small>warga</small></div>
 </div>
-<div style="margin-top:8px;padding:8px;background:#111;border:1px dashed #22c55e;text-align:center"><span style="color:#22c55e;font-size:11px">> TOTAL: <b id="totalBayar">Rp 0</b> (<span id="jmlBulan">0</span> bulan x <span id="perBulan">50000</span>)</span></div>
-<button class="btn bg" id="btnSimpan" onclick="tambahFix()">> SIMPAN_DATA</button>
-<p id="msg" style="text-align:center;font-size:10px;margin-top:8px;color:#00ffff"></p>
-<div style="display:flex;gap:4px;margin-top:6px"><button class="btn" style="font-size:8px;padding:6px;background:#333;color:#fff;border-color:#333" onclick="import105()">📥 IMPORT 105 WARGA</button><button class="btn" style="font-size:8px;padding:6px;background:#333;color:#fff;border-color:#333" onclick="syncAll()">☁️ SYNC</button></div>
-</div></div>
-<div class="card"><b style="color:#00ffff">> DATABASE (<span id="jml">0</span>)</b><input id="cari" placeholder="> SEARCH..." onkeyup="render()"><div id="listWarga"></div></div></div>
-<div id="warga" class="hidden"><div style="padding:12px;background:#000;border-bottom:2px solid #ff00ff;display:flex;justify-content:space-between;color:#00ffff"><b id="wNama">WARGA</b><button onclick="logout()" style="background:#ff00ff;color:#fff;border:none;padding:6px 12px">EXIT</button></div><div class="card"><h2 id="wTotal" style="color:#ffff00">Rp 0</h2><div id="wList"></div></div></div></div>
+<div id="aList" style="margin-top:8px"></div>
+</div>
+
+<div class="card" style="border-color:#ffff00"><b style="color:#ffff00" id="formTitle">> TAMBAH_DATA.exe</b>
+<input id="nama" placeholder="> Nama"><input id="wa" placeholder="> WA 628...">
+<div style="display:flex;gap:4px"><input id="nom" type="number" value="50000"><select id="jenis"><option value="in">> MASUK / IURAN</option><option value="out">> KELUAR / BELI</option></select></div>
+<b style="color:#00ffff;font-size:10px;margin-top:8px;display:block" id="labelBulan">> PILIH BULAN (untuk IURAN):</b>
+<div class="months" id="monthGrid"></div>
+<div style="display:flex;gap:4px;margin-top:6px"><button class="btn b10" style="font-size:8px;padding:6px" onclick="pilihBulan(10)">> 10 BLN LUNAS</button><button class="btn" style="font-size:8px;padding:6px" onclick="pilihBulan(12)">> 12 BLN FULL</button><button class="btn bd" style="font-size:8px;padding:6px" onclick="clearBulan()">> CLEAR</button></div>
+<div style="margin-top:6px;padding:6px;background:#111;border:1px dashed #22c55e;text-align:center"><small style="color:#22c55e">TOTAL: <b id="totalBayar">Rp 0</b> (<span id="jmlBulan">0</span> bln)</small></div>
+<button class="btn bg" id="btnSimpan" onclick="simpanData()">> SIMPAN_DATA</button><button class="btn bd hidden" id="btnBatal" onclick="batalEdit()">> BATAL EDIT</button>
+<p id="msg" style="text-align:center;font-size:9px;margin-top:6px"></p>
+<div style="display:flex;gap:4px"><button class="btn" style="font-size:8px;padding:6px;background:#222" onclick="import105()">📥 IMPORT 105</button><button class="btn" style="font-size:8px;padding:6px;background:#222" onclick="syncAll()">☁️ SYNC</button></div>
+</div>
+
+<div class="card"><b style="color:#00ffff">> DATABASE (<span id="jml">0</span>) <span id="mode" style="font-size:9px"></span></b><input id="cari" placeholder="> SEARCH..." onkeyup="render()"><div id="listWarga"></div></div></div></div>
 <script>
 var firebaseConfig={apiKey:"AIzaSyBykYOwRYyKNKkb0-tYblcwwDABWMnN4ko",authDomain:"blokb-online.firebaseapp.com",databaseURL:"https://blokb-online-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"blokb-online",storageBucket:"blokb-online.firebasestorage.app",messagingSenderId:"589827226624",appId:"1:589827226624:web:742737eae422e111b8ace5"};
 firebase.initializeApp(firebaseConfig);var db=firebase.database();
 var data=JSON.parse(localStorage.getItem('kartar_data')||'[]');
-var selectedMonths=[];
-var allWarga=[{name:"Rini",bulan:[9,10],nom:50000},{name:"Veni",bulan:[],nom:0},{name:"Danda",bulan:[9],nom:50000},{name:"Jeki",bulan:[9],nom:50000},{name:"Pesek",bulan:[9,10],nom:50000},{name:"IZA",bulan:[9],nom:50000},{name:"Linda",bulan:[9],nom:50000},{name:"Aldi",bulan:[9,10],nom:50000},{name:"Alfin",bulan:[9],nom:50000},{name:"Vicky",bulan:[],nom:0},{name:"Fedy",bulan:[9],nom:50000},{name:"Farid",bulan:[9,10,11],nom:50000},{name:"Ghang",bulan:[],nom:0},{name:"Bella",bulan:[9,10,11,12,1],nom:50000},{name:"Rokim",bulan:[9,10,11],nom:50000},{name:"Lusi",bulan:[9,10,11],nom:50000},{name:"Wilda",bulan:[],nom:0},{name:"Sholeh",bulan:[],nom:0},{name:"AAN",bulan:[9,10,11,12,1],nom:50000},{name:"Parmo",bulan:[9,10,11,12,1],nom:50000},{name:"Indah",bulan:[9],nom:50000},{name:"Putri",bulan:[9,10,11,12,1,2,3,4,5,6,7,8],nom:50000},{name:"Elen",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000},{name:"Efin",bulan:[9,10,11,12,1],nom:50000},{name:"Fatar",bulan:[9,10,11,12,1,2,3],nom:50000},{name:"Azil",bulan:[9,10,11,12,1,2,3],nom:50000},{name:"JAYA",bulan:[9,10],nom:50000},{name:"Ofi",bulan:[9],nom:50000},{name:"Azis",bulan:[9],nom:50000},{name:"Chika",bulan:[],nom:0},{name:"Ditta Rw",bulan:[9],nom:50000},{name:"Pingkan",bulan:[9],nom:50000},{name:"Meli",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000},{name:"Amel",bulan:[9],nom:50000},{name:"Akdi",bulan:[9,10,11,12,1],nom:50000},{name:"Riko",bulan:[],nom:0},{name:"Eriko",bulan:[9],nom:50000},{name:"Yusuf",bulan:[9],nom:50000},{name:"Andre",bulan:[],nom:0},{name:"MEGA",bulan:[9],nom:50000},{name:"SARMA",bulan:[9],nom:50000},{name:"Wiwin",bulan:[9],nom:50000},{name:"BETI",bulan:[9],nom:50000},{name:"TOHA",bulan:[9,10,11],nom:50000},{name:"BIMA",bulan:[9,10],nom:50000},{name:"BAYU",bulan:[9],nom:50000},{name:"Cindy",bulan:[],nom:0},{name:"Vega",bulan:[9],nom:50000},{name:"TRI",bulan:[9],nom:50000},{name:"PRAS",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000},{name:"Chelwin",bulan:[9],nom:50000},{name:"Trevi",bulan:[9],nom:50000},{name:"Ayu",bulan:[9,10],nom:50000},{name:"NURI YATI",bulan:[9,10],nom:50000},{name:"Helen",bulan:[9],nom:50000},{name:"Rizal",bulan:[9,10,11,12,1],nom:50000},{name:"Sigit",bulan:[9,10,11],nom:50000},{name:"Tia",bulan:[9,10],nom:50000},{name:"Dini",bulan:[],nom:0},{name:"Sinta",bulan:[9,10,11,12,1,2],nom:50000},{name:"Devi",bulan:[9],nom:50000},{name:"Arum",bulan:[9,10,11,12],nom:50000},{name:"Vian",bulan:[],nom:0},{name:"ARIS",bulan:[9,10,11],nom:50000},{name:"BAGAM",bulan:[9],nom:50000},{name:"Dimas kebab",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000},{name:"Robin",bulan:[9,10,11,12,1,2],nom:50000},{name:"Ariz",bulan:[9,10,11,12,1],nom:50000},{name:"Luffi",bulan:[9],nom:50000},{name:"Vita",bulan:[9],nom:50000},{name:"Shukron",bulan:[9],nom:50000},{name:"Dimas E",bulan:[9,10],nom:50000},{name:"Hamzah",bulan:[9,10,11],nom:50000},{name:"Adi",bulan:[9,10],nom:50000},{name:"Andi",bulan:[9],nom:50000},{name:"Dira Jan",bulan:[9],nom:50000},{name:"Alif",bulan:[9,10],nom:50000},{name:"IRUL",bulan:[9],nom:50000},{name:"Radit",bulan:[9],nom:50000},{name:"Rehan",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000},{name:"Hengki",bulan:[9],nom:50000},{name:"Aldo",bulan:[9],nom:50000},{name:"Ratih",bulan:[9],nom:50000},{name:"Rian kiwir",bulan:[9],nom:50000},{name:"Adi S",bulan:[],nom:0},{name:"Feri",bulan:[],nom:0},{name:"Rian lor",bulan:[9],nom:50000},{name:"Shinta k",bulan:[9],nom:50000},{name:"Wulan",bulan:[9],nom:50000},{name:"Sabrol",bulan:[],nom:0},{name:"Bella k",bulan:[9],nom:50000},{name:"Siti kidol",bulan:[],nom:0},{name:"Edi",bulan:[9],nom:50000},{name:"Anwar",bulan:[9],nom:50000},{name:"Novita I",bulan:[9],nom:50000},{name:"Dilla",bulan:[9],nom:50000},{name:"Yunus",bulan:[9],nom:50000},{name:"Vina Pc ageng",bulan:[],nom:0},{name:"Galepong",bulan:[9,10,11,12],nom:50000},{name:"Rio",bulan:[9],nom:50000},{name:"Cak Opek",bulan:[9],nom:50000},{name:"Nikmah",bulan:[9,10],nom:50000},{name:"ADE",bulan:[9,10],nom:50000},{name:"LESTA",bulan:[9],nom:50000},{name:"Kacung",bulan:[],nom:0},{name:"Yari Muri",bulan:[9],nom:50000}];
+var selectedMonths=[]; var editIdx=-1;
+var allWarga=[{name:"Rini",bulan:[9,10],nom:50000,jenis:"in"},{name:"Veni",bulan:[],nom:0,jenis:"in"},{name:"Danda",bulan:[9],nom:50000,jenis:"in"},{name:"Jeki",bulan:[9],nom:50000,jenis:"in"},{name:"Pesek",bulan:[9,10],nom:50000,jenis:"in"},{name:"IZA",bulan:[9],nom:50000,jenis:"in"},{name:"Linda",bulan:[9],nom:50000,jenis:"in"},{name:"Aldi",bulan:[9,10],nom:50000,jenis:"in"},{name:"Alfin",bulan:[9],nom:50000,jenis:"in"},{name:"Vicky",bulan:[],nom:0,jenis:"in"},{name:"Fedy",bulan:[9],nom:50000,jenis:"in"},{name:"Farid",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Ghang",bulan:[],nom:0,jenis:"in"},{name:"Bella",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Rokim",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Lusi",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Wilda",bulan:[],nom:0,jenis:"in"},{name:"Sholeh",bulan:[],nom:0,jenis:"in"},{name:"AAN",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Parmo",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Indah",bulan:[9],nom:50000,jenis:"in"},{name:"Putri",bulan:[9,10,11,12,1,2,3,4,5,6,7,8],nom:50000,jenis:"in"},{name:"Elen",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Efin",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Fatar",bulan:[9,10,11,12,1,2,3],nom:50000,jenis:"in"},{name:"Azil",bulan:[9,10,11,12,1,2,3],nom:50000,jenis:"in"},{name:"JAYA",bulan:[9,10],nom:50000,jenis:"in"},{name:"Ofi",bulan:[9],nom:50000,jenis:"in"},{name:"Azis",bulan:[9],nom:50000,jenis:"in"},{name:"Chika",bulan:[],nom:0,jenis:"in"},{name:"Ditta Rw",bulan:[9],nom:50000,jenis:"in"},{name:"Pingkan",bulan:[9],nom:50000,jenis:"in"},{name:"Meli",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000,jenis:"in"},{name:"Amel",bulan:[9],nom:50000,jenis:"in"},{name:"Akdi",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Riko",bulan:[],nom:0,jenis:"in"},{name:"Eriko",bulan:[9],nom:50000,jenis:"in"},{name:"Yusuf",bulan:[9],nom:50000,jenis:"in"},{name:"Andre",bulan:[],nom:0,jenis:"in"},{name:"MEGA",bulan:[9],nom:50000,jenis:"in"},{name:"SARMA",bulan:[9],nom:50000,jenis:"in"},{name:"Wiwin",bulan:[9],nom:50000,jenis:"in"},{name:"BETI",bulan:[9],nom:50000,jenis:"in"},{name:"TOHA",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"BIMA",bulan:[9,10],nom:50000,jenis:"in"},{name:"BAYU",bulan:[9],nom:50000,jenis:"in"},{name:"Cindy",bulan:[],nom:0,jenis:"in"},{name:"Vega",bulan:[9],nom:50000,jenis:"in"},{name:"TRI",bulan:[9],nom:50000,jenis:"in"},{name:"PRAS",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Chelwin",bulan:[9],nom:50000,jenis:"in"},{name:"Trevi",bulan:[9],nom:50000,jenis:"in"},{name:"Ayu",bulan:[9,10],nom:50000,jenis:"in"},{name:"NURI YATI",bulan:[9,10],nom:50000,jenis:"in"},{name:"Helen",bulan:[9],nom:50000,jenis:"in"},{name:"Rizal",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Sigit",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Tia",bulan:[9,10],nom:50000,jenis:"in"},{name:"Dini",bulan:[],nom:0,jenis:"in"},{name:"Sinta",bulan:[9,10,11,12,1,2],nom:50000,jenis:"in"},{name:"Devi",bulan:[9],nom:50000,jenis:"in"},{name:"Arum",bulan:[9,10,11,12],nom:50000,jenis:"in"},{name:"Vian",bulan:[],nom:0,jenis:"in"},{name:"ARIS",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"BAGAM",bulan:[9],nom:50000,jenis:"in"},{name:"Dimas kebab",bulan:[9,10,11,12,1,2,3,4,5,6,7],nom:50000,jenis:"in"},{name:"Robin",bulan:[9,10,11,12,1,2],nom:50000,jenis:"in"},{name:"Ariz",bulan:[9,10,11,12,1],nom:50000,jenis:"in"},{name:"Luffi",bulan:[9],nom:50000,jenis:"in"},{name:"Vita",bulan:[9],nom:50000,jenis:"in"},{name:"Shukron",bulan:[9],nom:50000,jenis:"in"},{name:"Dimas E",bulan:[9,10],nom:50000,jenis:"in"},{name:"Hamzah",bulan:[9,10,11],nom:50000,jenis:"in"},{name:"Adi",bulan:[9,10],nom:50000,jenis:"in"},{name:"Andi",bulan:[9],nom:50000,jenis:"in"},{name:"Dira Jan",bulan:[9],nom:50000,jenis:"in"},{name:"Alif",bulan:[9,10],nom:50000,jenis:"in"},{name:"IRUL",bulan:[9],nom:50000,jenis:"in"},{name:"Radit",bulan:[9],nom:50000,jenis:"in"},{name:"Rehan",bulan:[9,10,11,12,1,2,3,4,5,6],nom:50000,jenis:"in"},{name:"Hengki",bulan:[9],nom:50000,jenis:"in"},{name:"Aldo",bulan:[9],nom:50000,jenis:"in"},{name:"Ratih",bulan:[9],nom:50000,jenis:"in"},{name:"Rian kiwir",bulan:[9],nom:50000,jenis:"in"},{name:"Adi S",bulan:[],nom:0,jenis:"in"},{name:"Feri",bulan:[],nom:0,jenis:"in"},{name:"Rian lor",bulan:[9],nom:50000,jenis:"in"},{name:"Shinta k",bulan:[9],nom:50000,jenis:"in"},{name:"Wulan",bulan:[9],nom:50000,jenis:"in"},{name:"Sabrol",bulan:[],nom:0,jenis:"in"},{name:"Bella k",bulan:[9],nom:50000,jenis:"in"},{name:"Siti kidol",bulan:[],nom:0,jenis:"in"},{name:"Edi",bulan:[9],nom:50000,jenis:"in"},{name:"Anwar",bulan:[9],nom:50000,jenis:"in"},{name:"Novita I",bulan:[9],nom:50000,jenis:"in"},{name:"Dilla",bulan:[9],nom:50000,jenis:"in"},{name:"Yunus",bulan:[9],nom:50000,jenis:"in"},{name:"Vina Pc ageng",bulan:[],nom:0,jenis:"in"},{name:"Galepong",bulan:[9,10,11,12],nom:50000,jenis:"in"},{name:"Rio",bulan:[9],nom:50000,jenis:"in"},{name:"Cak Opek",bulan:[9],nom:50000,jenis:"in"},{name:"Nikmah",bulan:[9,10],nom:50000,jenis:"in"},{name:"ADE",bulan:[9,10],nom:50000,jenis:"in"},{name:"LESTA",bulan:[9],nom:50000,jenis:"in"},{name:"Kacung",bulan:[],nom:0,jenis:"in"},{name:"Yari Muri",bulan:[9],nom:50000,jenis:"in"}];
 
 function buildMonths(){
   var grid=document.getElementById('monthGrid');
   var labels={9:'SEP',10:'OKT',11:'NOV',12:'DES',1:'JAN',2:'FEB',3:'MAR',4:'APR',5:'MEI',6:'JUN',7:'JUL',8:'AGU'};
   var order=[9,10,11,12,1,2,3,4,5,6,7,8];
-  var h='';
-  for(var i=0;i<order.length;i++){
-    var b=order[i];
-    h+='<div class="mchk" id="m'+b+'" onclick="toggleMonth('+b+')">'+labels[b]+'<br><small>'+b+'</small></div>';
-  }
+  var h=''; for(var i=0;i<order.length;i++){ var b=order[i]; h+='<div class="mchk" id="m'+b+'" onclick="toggleMonth('+b+')">'+labels[b]+'<br>'+b+'</div>'; }
   grid.innerHTML=h;
-  document.getElementById('nom').addEventListener('input',updateTotal);
+  var nomEl=document.getElementById('nom'); if(nomEl){ nomEl.addEventListener('input',updateTotal); }
+  var jenisEl=document.getElementById('jenis'); if(jenisEl){ jenisEl.addEventListener('change',function(){ if(this.value==='out'){ document.getElementById('monthGrid').style.display='none'; document.getElementById('labelBulan').innerText='> MODE PENGELUARAN (beli, acara)'; } else { document.getElementById('monthGrid').style.display='grid'; document.getElementById('labelBulan').innerText='> PILIH BULAN (untuk IURAN):'; } updateTotal(); }); }
 }
-function toggleMonth(b){
-  var idx=selectedMonths.indexOf(b);
-  if(idx===-1) selectedMonths.push(b); else selectedMonths.splice(idx,1);
-  selectedMonths.sort(function(a,b){ var o=[9,10,11,12,1,2,3,4,5,6,7,8]; return o.indexOf(a)-o.indexOf(b); });
-  refreshMonthUI(); updateTotal();
-}
-function pilihBulan(jml){
-  selectedMonths=[];
-  var order=[9,10,11,12,1,2,3,4,5,6,7,8];
-  for(var i=0;i<jml&&i<order.length;i++) selectedMonths.push(order[i]);
-  refreshMonthUI(); updateTotal();
-}
-function clearBulan(){selectedMonths=[]; refreshMonthUI(); updateTotal();}
-function refreshMonthUI(){
-  var order=[9,10,11,12,1,2,3,4,5,6,7,8];
-  for(var i=0;i<order.length;i++){
-    var el=document.getElementById('m'+order[i]);
-    if(el){
-      if(selectedMonths.indexOf(order[i])!==-1) el.classList.add('active');
-      else el.classList.remove('active');
-    }
-  }
-}
-function updateTotal(){
-  var per=parseInt(document.getElementById('nom').value)||50000;
-  document.getElementById('perBulan').innerText=per.toLocaleString('id-ID');
-  document.getElementById('jmlBulan').innerText=selectedMonths.length;
-  document.getElementById('totalBayar').innerText='Rp '+(per*selectedMonths.length).toLocaleString('id-ID');
-}
+function toggleMonth(b){ var idx=selectedMonths.indexOf(b); if(idx===-1) selectedMonths.push(b); else selectedMonths.splice(idx,1); refreshMonthUI(); updateTotal(); }
+function pilihBulan(jml){ selectedMonths=[]; var order=[9,10,11,12,1,2,3,4,5,6,7,8]; for(var i=0;i<jml;i++) selectedMonths.push(order[i]); refreshMonthUI(); updateTotal(); }
+function clearBulan(){ selectedMonths=[]; refreshMonthUI(); updateTotal(); }
+function refreshMonthUI(){ var order=[9,10,11,12,1,2,3,4,5,6,7,8]; for(var i=0;i<order.length;i++){ var el=document.getElementById('m'+order[i]); if(el){ if(selectedMonths.indexOf(order[i])!==-1) el.classList.add('active'); else el.classList.remove('active'); } } }
+function updateTotal(){ var per=parseInt(document.getElementById('nom').value)||0; var jenis=document.getElementById('jenis').value; if(jenis==='out'){ document.getElementById('totalBayar').innerText='Rp '+per.toLocaleString('id-ID'); document.getElementById('jmlBulan').innerText='1x keluar'; } else { document.getElementById('totalBayar').innerText='Rp '+(per*selectedMonths.length).toLocaleString('id-ID'); document.getElementById('jmlBulan').innerText=selectedMonths.length+' bulan'; } }
 
-function hitungTotal(){var t=0;for(var i=0;i<data.length;i++){t+=(data[i].bulan?data[i].bulan.length:0)*(parseInt(data[i].nom)||50000);}return t;}
 db.ref('kartar').on('value',function(s){
-  document.getElementById('conn').innerText='> CONNECTED SINGAPORE [OK]';
-  document.getElementById('mode').innerText='ONLINE';document.getElementById('mode').style.color='#22c55e';
-  if(s.val()){
-    var val=s.val();var arr=[];
-    if(Array.isArray(val)){for(var i=0;i<val.length;i++){if(val[i]&&val[i].name) arr.push(val[i]);}}
-    else{for(var k in val){if(val[k]&&val[k].name) arr.push(val[k]);}}
-    if(arr.length>20){data=arr;localStorage.setItem('kartar_data',JSON.stringify(data));}
-  }render();
-},function(e){document.getElementById('conn').innerText='> ERROR '+e.message;});
-
-function import105(){data=allWarga; localStorage.setItem('kartar_data',JSON.stringify(data)); document.getElementById('msg').innerText='✅ '+data.length+' warga imported!'; render(); syncAll();}
-function syncAll(){ if(data.length==0) return; db.ref('kartar').set(data).then(function(){document.getElementById('msg').innerText='✅ SYNC OK '+data.length+' warga Rp '+hitungTotal().toLocaleString('id-ID');});}
-
-function tambahFix(){
-  var n=document.getElementById('nama').value.trim();
-  var w=document.getElementById('wa').value.trim();
-  var nomV=document.getElementById('nom').value.trim();
-  var msg=document.getElementById('msg');
-  if(!n){alert('Nama wajib!');return;}
-  if(selectedMonths.length==0){alert('Pilih minimal 1 bulan! Klik 10 BULAN LUNAS');return;}
-  var nom=parseInt(nomV)||50000;
-  var baru={name:n,wa:w,nom:nom,bulan:selectedMonths.slice(),tgl:Date.now()};
-  data.push(baru); localStorage.setItem('kartar_data',JSON.stringify(data));
-  document.getElementById('msg').style.color='#22c55e';
-  document.getElementById('msg').innerText='> SAVED '+n+' '+selectedMonths.length+' BULAN = Rp '+(nom*selectedMonths.length).toLocaleString('id-ID')+' [OK]';
-  document.getElementById('nama').value=''; clearBulan(); render();
-  db.ref('kartar').push(baru);
-}
+  document.getElementById('conn').innerText='> CONNECTED [OK]'; document.getElementById('mode').innerText='ONLINE'; document.getElementById('mode').style.color='#22c55e';
+  if(s.val()){ var val=s.val(); var arr=[]; if(Array.isArray(val)){for(var i=0;i<val.length;i++){if(val[i]&&val[i].name) arr.push(val[i]);}} else{for(var k in val){if(val[k]&&val[k].name) arr.push(val[k]);}} if(arr.length>20){data=arr; localStorage.setItem('kartar_data',JSON.stringify(data));} } render();
+});
+function import105(){ data=allWarga; localStorage.setItem('kartar_data',JSON.stringify(data)); syncAll(); render(); document.getElementById('msg').innerText='✅ 105 warga imported'; }
+function syncAll(){ if(data.length==0) return; db.ref('kartar').set(data).then(function(){document.getElementById('msg').innerText='✅ SYNC OK';}); }
+function hitung(){ var masuk=0,keluar=0,lunas10=0,belum=0; for(var i=0;i<data.length;i++){ var bln=data[i].bulan?data[i].bulan.length:0; var nom=parseInt(data[i].nom)||0; if(data[i].jenis==='out'){ keluar+=nom; } else { masuk+=bln*nom; if(bln>=10) lunas10++; if(bln===0) belum++; } } return{masuk,keluar,saldo:masuk-keluar,lunas10,belum}; }
 function render(){
-  var total=hitungTotal();
-  document.getElementById('aTotal').innerText='Rp '+total.toLocaleString('id-ID');
-  var wTot=document.getElementById('wTotal'); if(wTot) wTot.innerText='Rp '+total.toLocaleString('id-ID');
-  document.getElementById('jml').innerText=data.length; document.getElementById('totalW').innerText=data.length;
-  var h='';var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase();
+  var h=hitung();
+  document.getElementById('aTotal').innerText='Rp '+h.saldo.toLocaleString('id-ID');
+  document.getElementById('pemasukan').innerText='Rp '+h.masuk.toLocaleString('id-ID');
+  document.getElementById('pengeluaran').innerText='Rp '+h.keluar.toLocaleString('id-ID');
+  document.getElementById('totalW').innerText=data.length; document.getElementById('jmlLunas').innerText=h.lunas10+' lunas 10 bln'; document.getElementById('belum').innerText=h.belum; document.getElementById('jmlKeluar').innerText=data.filter(d=>d.jenis==='out').length+' transaksi'; document.getElementById('jml').innerText=data.length;
+  var html=''; for(var j=data.length-1;j>=0&&j>data.length-5;j--){ if(!data[j]) continue; var isOut=data[j].jenis==='out'; html+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #444;font-size:10px"><span>'+(isOut?'[KELUAR] ':'')+data[j].name+'</span><b style="color:'+(isOut?'#ef4444':'#ffff00')+'">Rp '+(isOut?parseInt(data[j].nom):(data[j].bulan?data[j].bulan.length*parseInt(data[j].nom):0)).toLocaleString('id-ID')+'</b></div>'; } document.getElementById('aList').innerHTML=html;
+  var list=''; var q=(document.getElementById('cari')?document.getElementById('cari').value:'').toLowerCase();
   for(var i=0;i<data.length;i++){
     if(data[i].name.toLowerCase().indexOf(q)===-1) continue;
-    var bln=data[i].bulan?data[i].bulan.length:0;
-    var badge=bln>=10?'10 BLN LUNAS':bln>=5?bln+' BLN':bln>0?bln+' BLN':'BELUM';
-    var col=bln>=10?'#22c55e':bln>=5?'#ffff00':bln>0?'#00ffff':'#ef4444';
-    h+='<div class="item"><div><b style="color:'+col+'">'+data[i].name+'</b> <small style="background:'+col+';color:#000;padding:1px 4px;border-radius:4px;font-size:8px">'+badge+'</small><br><small style="color:#888">Bl: '+(data[i].bulan?data[i].bulan.join(','):'-')+'</small></div><div style="text-align:right"><b style="color:'+col+'">Rp '+((bln*(parseInt(data[i].nom)||50000)).toLocaleString('id-ID'))+'</b><br><small>'+(bln>0?'Rp '+(parseInt(data[i].nom)||50000).toLocaleString('id-ID')+'/bln':'')+'</small> <button onclick="hapusData('+i+')" style="background:#ff00ff;color:#fff;border:none;padding:2px 6px;font-size:8px">DEL</button></div></div>';
+    var bln=data[i].bulan?data[i].bulan.length:0; var isOut=data[i].jenis==='out';
+    var badge=isOut?'KELUAR':bln>=10?'10 BLN LUNAS':bln>=1?bln+' BLN':'BELUM'; var col=isOut?'#ef4444':bln>=10?'#22c55e':bln>=1?'#00ffff':'#ef4444';
+    list+='<div class="item"><div><b style="color:'+col+'">'+data[i].name+'</b> <small style="background:'+col+';color:#000;padding:1px 4px;border-radius:4px;font-size:8px">'+badge+'</small><br><small style="opacity:.6">'+(isOut?data[i].name+' pengeluaran':(data[i].bulan?data[i].bulan.join(','):'-'))+'</small></div><div style="text-align:right"><b style="color:'+col+'">Rp '+((isOut?parseInt(data[i].nom):bln*(parseInt(data[i].nom)||50000)).toLocaleString('id-ID'))+'</b><br><div style="margin-top:4px"><button onclick="editData('+i+')" style="background:#ffff00;color:#000;border:none;padding:4px 8px;font-size:9px;font-weight:800;margin-right:3px">EDIT</button><button onclick="hapusData('+i+')" style="background:#ff00ff;color:#fff;border:none;padding:4px 8px;font-size:9px">DEL</button></div></div></div>';
   }
-  document.getElementById('listWarga').innerHTML=h||'> NO DATA - IMPORT 105';
-  var aList=''; for(var j=data.length-1;j>=0&&j>data.length-4;j--){ if(data[j]) aList+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #444;font-size:10px"><span>'+data[j].name+' ('+(data[j].bulan?data[j].bulan.length:0)+' bln)</span><b style="color:#ffff00">Rp '+((data[j].bulan?data[j].bulan.length:0)*(parseInt(data[j].nom)||50000)).toLocaleString('id-ID')+'</b></div>';}
-  document.getElementById('aList').innerHTML=aList;
+  document.getElementById('listWarga').innerHTML=list||'> NO DATA';
 }
-function hapusData(i){if(!confirm('Hapus '+data[i].name+'?')) return; data.splice(i,1); localStorage.setItem('kartar_data',JSON.stringify(data)); render(); db.ref('kartar').set(data);}
-function doLogin(){var p=document.getElementById('pass').value.trim();if(p.toLowerCase()==='blokb2026'){localStorage.setItem('admin','1');showAdmin();}else if(p!=''){localStorage.setItem('user',p);localStorage.removeItem('admin');showWarga();}}
-function showWarga(){document.getElementById('login').classList.add('hidden');document.getElementById('admin').classList.add('hidden');document.getElementById('warga').classList.remove('hidden');var n=localStorage.getItem('user')||'WARGA';var el=document.getElementById('wNama');if(el) el.innerText=n.toUpperCase();render();}
-function showAdmin(){document.getElementById('login').classList.add('hidden');document.getElementById('warga').classList.add('hidden');document.getElementById('admin').classList.remove('hidden');buildMonths();render();}
-function logout(){localStorage.removeItem('admin');localStorage.removeItem('user');location.reload();}
+function simpanData(){
+  var n=document.getElementById('nama').value.trim();
+  var w=document.getElementById('wa').value.trim();
+  var nom=parseInt(document.getElementById('nom').value)||0;
+  var jenis=document.getElementById('jenis').value;
+  if(!n){alert('Nama wajib');return;}
+  if(jenis==='in' && selectedMonths.length===0){alert('Pilih bulan! Klik 10 BULAN LUNAS');return;}
+  if(nom<=0){alert('Nominal salah');return;}
+  var obj={name:n,wa:w,nom:nom,bulan:jenis==='in'?selectedMonths.slice():[],jenis:jenis,tgl:Date.now()};
+  if(editIdx>=0){ data[editIdx]=obj; editIdx=-1; document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA'; document.getElementById('btnBatal').classList.add('hidden'); document.getElementById('msg').innerText='✅ EDIT OK '+n; }
+  else { data.push(obj); document.getElementById('msg').innerText='✅ SIMPAN OK '+n+' '+(jenis==='in'?selectedMonths.length+' bln':'KELUAR'); }
+  localStorage.setItem('kartar_data',JSON.stringify(data)); document.getElementById('nama').value=''; clearBulan(); render(); syncAll();
+}
+function editData(i){
+  var d=data[i]; editIdx=i;
+  document.getElementById('nama').value=d.name; document.getElementById('wa').value=d.wa||''; document.getElementById('nom').value=d.nom; document.getElementById('jenis').value=d.jenis||'in';
+  selectedMonths=d.bulan?d.bulan.slice():[]; refreshMonthUI(); updateTotal();
+  document.getElementById('formTitle').innerText='> EDIT_DATA.exe - '+d.name; document.getElementById('btnSimpan').innerText='> UPDATE_DATA'; document.getElementById('btnBatal').classList.remove('hidden');
+  window.scrollTo(0,0); document.getElementById('msg').innerText='> EDIT MODE: '+d.name;
+}
+function batalEdit(){ editIdx=-1; document.getElementById('nama').value=''; document.getElementById('wa').value=''; clearBulan(); document.getElementById('formTitle').innerText='> TAMBAH_DATA.exe'; document.getElementById('btnSimpan').innerText='> SIMPAN_DATA'; document.getElementById('btnBatal').classList.add('hidden'); document.getElementById('msg').innerText=''; }
+function hapusData(i){ if(!confirm('Hapus '+data[i].name+'?')) return; data.splice(i,1); localStorage.setItem('kartar_data',JSON.stringify(data)); render(); syncAll(); }
+function doLogin(){ var p=document.getElementById('pass').value.trim(); if(p.toLowerCase()==='blokb2026'){localStorage.setItem('admin','1');showAdmin();} else {showAdmin();} }
+function showAdmin(){ document.getElementById('login').classList.add('hidden'); document.getElementById('admin').classList.remove('hidden'); buildMonths(); render(); }
+function logout(){ localStorage.removeItem('admin'); location.reload(); }
 if(localStorage.getItem('admin')==='1') showAdmin();
 buildMonths(); updateTotal(); render();
 </script></body></html>
